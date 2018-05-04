@@ -1,0 +1,4 @@
+Bundle-Name: amfUser-web
+Bundle-SymbolicName: amfUser.web.portlet
+Bundle-Version: 1.0.0
+Export-Package: amfUser.web.portlet.constants
