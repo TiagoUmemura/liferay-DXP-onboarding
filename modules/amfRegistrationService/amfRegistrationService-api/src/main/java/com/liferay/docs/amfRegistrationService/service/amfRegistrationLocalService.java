@@ -16,10 +16,14 @@ package com.liferay.docs.amfRegistrationService.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.docs.amfRegistrationService.model.AMFUser;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.service.BaseLocalService;
+import com.liferay.portal.kernel.service.UserServiceUtil;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
@@ -43,6 +47,7 @@ public interface amfRegistrationLocalService extends BaseLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link amfRegistrationLocalServiceUtil} to access the amf registration local service. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void addAMFUser(AMFUser user) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -50,4 +55,7 @@ public interface amfRegistrationLocalService extends BaseLocalService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public UserServiceUtil getUserService();
 }

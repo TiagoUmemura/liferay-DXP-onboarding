@@ -2,17 +2,23 @@ package amfUser.web.portlet.portlet;
 
 import amfUser.web.portlet.constants.AMFUserPortletKeys;
 
+import com.liferay.docs.amfRegistrationService.model.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+
+import java.util.Locale;
 
 /**
  * @author tiago
@@ -38,7 +44,7 @@ public class AMFUserPortlet extends MVCPortlet {
 
 	public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
 
-	public void addUser(ActionRequest request, ActionResponse response) {
+	public void addUser(ActionRequest request, ActionResponse response) throws PortalException {
 		String firtName = ParamUtil.getString(request, "first_name");
 		String lastName = ParamUtil.getString(request, "last_name");
 		String emailAddress = ParamUtil.getString(request, "email_address");
@@ -60,6 +66,12 @@ public class AMFUserPortlet extends MVCPortlet {
 		String securityQuestion = ParamUtil.getString(request, "security_question");
 		String securityAnswer = ParamUtil.getString(request, "security_answer");
 		boolean acceptedTou = ParamUtil.getBoolean(request, "accepted_tou");
-		
+
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		long companyId = themeDisplay.getCompanyId();
+		Locale locale = themeDisplay.getLocale();
+
+		AMFUser user = new AMFUser(firtName,lastName,emailAddress,username,gender,birthday,password1,password2,homePhone,mobilePhone,address1,address2,city,state,zip,securityQuestion,securityAnswer,acceptedTou, companyId, locale);
+		getAmfLocalService().addAMFUser(user);
 	}
 }

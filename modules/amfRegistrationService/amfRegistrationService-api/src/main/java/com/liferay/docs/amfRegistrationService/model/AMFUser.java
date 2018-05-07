@@ -1,5 +1,7 @@
 package com.liferay.docs.amfRegistrationService.model;
 
+import java.util.Locale;
+
 public class AMFUser {
     private String firtName;
     private String lastName;
@@ -22,8 +24,10 @@ public class AMFUser {
     private String securityQuestion;
     private String securityAnswer;
     private boolean acceptedTou;
+    private long companyId;
+    private Locale locale;
 
-    public AMFUser(String firtName, String lastName, String emailAddress, String username, String gender, String birthday, String password1, String password2, String homePhone, String mobilePhone, String address1, String address2, String city, String state, String zip, String securityQuestion, String securityAnswer, boolean acceptedTou) {
+    public AMFUser(String firtName, String lastName, String emailAddress, String username, String gender, String birthday, String password1, String password2, String homePhone, String mobilePhone, String address1, String address2, String city, String state, String zip, String securityQuestion, String securityAnswer, boolean acceptedTou, long companyId, Locale locale) {
         this.firtName = firtName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -42,6 +46,8 @@ public class AMFUser {
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
         this.acceptedTou = acceptedTou;
+        this.companyId = companyId;
+        this.locale = locale;
     }
 
     public String getFirtName() {
@@ -186,5 +192,21 @@ public class AMFUser {
 
     public void setAcceptedTou(boolean acceptedTou) {
         this.acceptedTou = acceptedTou;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 }

@@ -41,6 +41,11 @@ public class amfRegistrationLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static void addAMFUser(
+		com.liferay.docs.amfRegistrationService.model.AMFUser user)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().addAMFUser(user);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -49,6 +54,10 @@ public class amfRegistrationLocalServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.service.UserServiceUtil getUserService() {
+		return getService().getUserService();
 	}
 
 	public static amfRegistrationLocalService getService() {

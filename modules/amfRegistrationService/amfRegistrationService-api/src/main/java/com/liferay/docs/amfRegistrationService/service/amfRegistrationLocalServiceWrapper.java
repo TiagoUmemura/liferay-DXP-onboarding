@@ -34,6 +34,13 @@ public class amfRegistrationLocalServiceWrapper
 		_amfRegistrationLocalService = amfRegistrationLocalService;
 	}
 
+	@Override
+	public void addAMFUser(
+		com.liferay.docs.amfRegistrationService.model.AMFUser user)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_amfRegistrationLocalService.addAMFUser(user);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -42,6 +49,11 @@ public class amfRegistrationLocalServiceWrapper
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _amfRegistrationLocalService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.service.UserServiceUtil getUserService() {
+		return _amfRegistrationLocalService.getUserService();
 	}
 
 	@Override

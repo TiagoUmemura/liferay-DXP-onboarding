@@ -16,6 +16,12 @@ package com.liferay.docs.amfRegistrationService.service.impl;
 
 import com.liferay.docs.amfRegistrationService.model.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.service.UserServiceUtil;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * The implementation of the amf registration local service.
@@ -38,7 +44,21 @@ public class amfRegistrationLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil} to access the amf registration local service.
 	 */
-	public void addAMFUser(AMFUser user){
+	@Reference
+	private volatile UserServiceUtil _userService;
 
+	public UserServiceUtil getUserService() { return _userService; }
+
+	public void addAMFUser(AMFUser user) throws PortalException {
+		String[] birthday = user.getBirthday().split("/");
+		int birthdayMonth = Integer.parseInt(birthday[0]);
+		int birthdayDay = Integer.parseInt(birthday[1]);
+		int birthdayYear = Integer.parseInt(birthday[2]);
+
+		User userAMF = getUserService().addUser(
+			user.getCompanyId(), false, user.getPassword1(), user.getPassword2(),false, user.getUsername(), user.getEmailAddress(), 0, null,
+			user.getLocale(), user.getFirtName(), "", user.getLastName(), 0, 0, "male".equals(user.getGender()), birthdayMonth, birthdayDay, birthdayYear,
+			"", null, null, null, null, false, new ServiceContext()
+		);
 	}
 }
