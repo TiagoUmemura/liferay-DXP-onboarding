@@ -52,11 +52,6 @@ public class amfRegistrationLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.portal.kernel.service.UserServiceUtil getUserService() {
-		return _amfRegistrationLocalService.getUserService();
-	}
-
-	@Override
 	public amfRegistrationLocalService getWrappedService() {
 		return _amfRegistrationLocalService;
 	}

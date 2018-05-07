@@ -56,10 +56,6 @@ public class amfRegistrationLocalServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.portal.kernel.service.UserServiceUtil getUserService() {
-		return getService().getUserService();
-	}
-
 	public static amfRegistrationLocalService getService() {
 		return _serviceTracker.getService();
 	}

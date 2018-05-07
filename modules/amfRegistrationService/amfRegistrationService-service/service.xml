@@ -5,5 +5,9 @@
 	<namespace>FOO</namespace>
 	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
 
-	<entity name="amfRegistration" local-service="true" remote-service="false"></entity>
+	<entity name="amfRegistration" local-service="true" remote-service="false">
+		<reference entity="User" package-path="com.liferay.portal" />
+		<reference entity="Address" package-path="com.liferay.portal" />
+		<reference entity="Phone" package-path="com.liferay.portal" />
+	</entity>
 </service-builder>
