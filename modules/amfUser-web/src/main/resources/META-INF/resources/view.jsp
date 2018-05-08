@@ -12,6 +12,11 @@
 
 <liferay-ui:error key="InvalidFirstName" message="InvalidFirstName" />
 <liferay-ui:error key="InvalidLastName" message="InvalidLastName" />
+<liferay-ui:error key="InvalidEmail" message="InvalidEmail" />
+<liferay-ui:error key="InvalidUserName" message="InvalidUserName" />
+<liferay-ui:error key="InvalidBirthday" message="InvalidBirthday" />
+<liferay-ui:error key="InvalidHomePhone" message="InvalidHomePhone" />
+<liferay-ui:error key="InvalidMobilePhone" message="InvalidMobilePhone" />
 
 <aui:form action="<%= addUserURL %>" name="<portlet:namespace />fm">
 	<aui:fieldset>

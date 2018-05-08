@@ -43,7 +43,8 @@ public class amfRegistrationLocalServiceUtil {
 	 */
 	public static void addAMFUser(
 		com.liferay.docs.amfRegistrationService.model.AMFUser user)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			java.text.ParseException {
 		getService().addAMFUser(user);
 	}
 

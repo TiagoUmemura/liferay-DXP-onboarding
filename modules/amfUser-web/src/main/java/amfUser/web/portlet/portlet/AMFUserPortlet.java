@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.text.ParseException;
 import java.util.Locale;
 
 /**
@@ -83,6 +84,8 @@ public class AMFUserPortlet extends MVCPortlet {
 				SessionErrors.add(request, error);
 			}
 		} catch (PortalException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 

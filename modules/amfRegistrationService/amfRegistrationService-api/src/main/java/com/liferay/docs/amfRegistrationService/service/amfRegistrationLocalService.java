@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import java.text.ParseException;
+
 /**
  * Provides the local service interface for amfRegistration. Methods of this
  * service will not have security checks based on the propagated JAAS
@@ -45,7 +47,7 @@ public interface amfRegistrationLocalService extends BaseLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link amfRegistrationLocalServiceUtil} to access the amf registration local service. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public void addAMFUser(AMFUser user) throws PortalException;
+	public void addAMFUser(AMFUser user) throws PortalException, ParseException;
 
 	/**
 	* Returns the OSGi service identifier.
