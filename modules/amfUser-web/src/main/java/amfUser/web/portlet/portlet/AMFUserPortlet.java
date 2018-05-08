@@ -2,9 +2,9 @@ package amfUser.web.portlet.portlet;
 
 import amfUser.web.portlet.constants.AMFUserPortletKeys;
 
+import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
 import com.liferay.docs.amfRegistrationService.model.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
-import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
@@ -12,6 +12,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -44,7 +45,7 @@ public class AMFUserPortlet extends MVCPortlet {
 
 	public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
 
-	public void addUser(ActionRequest request, ActionResponse response) throws PortalException {
+	public void addUser(ActionRequest request, ActionResponse response) {
 		String firtName = ParamUtil.getString(request, "first_name");
 		String lastName = ParamUtil.getString(request, "last_name");
 		String emailAddress = ParamUtil.getString(request, "email_address");
@@ -72,6 +73,18 @@ public class AMFUserPortlet extends MVCPortlet {
 		Locale locale = themeDisplay.getLocale();
 
 		AMFUser user = new AMFUser(firtName,lastName,emailAddress,username,gender,birthday,password1,password2,homePhone,mobilePhone,address1,address2,city,state,zip,securityQuestion,securityAnswer,acceptedTou, companyId, locale);
-		getAmfLocalService().addAMFUser(user);
+
+		try {
+			SessionErrors.clear(request);
+			getAmfLocalService().addAMFUser(user);
+		} catch (RegistrationException e) {
+			//Add error messages if there are invalid values on some field
+			for (String error: e.getErrors()) {
+				SessionErrors.add(request, error);
+			}
+		} catch (PortalException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

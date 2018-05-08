@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ include file="/init.jsp" %>
 
 <portlet:renderURL var="viewURL">
@@ -5,6 +6,11 @@
 </portlet:renderURL>
 
 <portlet:actionURL name="addUser" var="addUserURL"></portlet:actionURL>
+
+
+<liferay-ui:error key="InvalidFirstName" message="Sorry, an error prevented saving your greeting" />
+<liferay-ui:error key="InvalidLastName" message="Sorry, an error prevented saving your greeting" />
+
 
 <aui:form action="<%= addUserURL %>" name="<portlet:namespace />fm">
     <aui:fieldset>

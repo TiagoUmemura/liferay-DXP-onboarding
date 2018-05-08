@@ -3,7 +3,7 @@ package com.liferay.docs.amfRegistrationService.model;
 import java.util.Locale;
 
 public class AMFUser {
-    private String firtName;
+    private String firstName;
     private String lastName;
     private String emailAddress;
     private String username;
@@ -28,7 +28,7 @@ public class AMFUser {
     private Locale locale;
 
     public AMFUser(String firtName, String lastName, String emailAddress, String username, String gender, String birthday, String password1, String password2, String homePhone, String mobilePhone, String address1, String address2, String city, String state, String zip, String securityQuestion, String securityAnswer, boolean acceptedTou, long companyId, Locale locale) {
-        this.firtName = firtName;
+        this.firstName = firtName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.username = username;
@@ -50,12 +50,12 @@ public class AMFUser {
         this.locale = locale;
     }
 
-    public String getFirtName() {
-        return firtName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirtName(String firtName) {
-        this.firtName = firtName;
+    public void setFirstName(String firtName) {
+        this.firstName = firtName;
     }
 
     public String getLastName() {

@@ -3,6 +3,7 @@ Bundle-SymbolicName: com.liferay.docs.amfRegistrationService.api
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.docs.amfRegistrationService.exception,\
+	com.liferay.docs.amfRegistrationService.exceptions,\
 	com.liferay.docs.amfRegistrationService.model,\
 	com.liferay.docs.amfRegistrationService.service,\
 	com.liferay.docs.amfRegistrationService.service.persistence

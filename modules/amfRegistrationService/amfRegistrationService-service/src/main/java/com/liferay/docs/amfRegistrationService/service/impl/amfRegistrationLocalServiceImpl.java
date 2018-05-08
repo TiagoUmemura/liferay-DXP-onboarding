@@ -14,17 +14,12 @@
 
 package com.liferay.docs.amfRegistrationService.service.impl;
 
+import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
 import com.liferay.docs.amfRegistrationService.model.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.model.Address;
-import com.liferay.portal.kernel.model.Contact;
-import com.liferay.portal.kernel.model.Phone;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserService;
-import com.liferay.portal.kernel.service.UserServiceUtil;
-import org.osgi.service.component.annotations.Reference;
+
+import java.util.ArrayList;
 
 /**
  * The implementation of the amf registration local service.
@@ -47,31 +42,56 @@ public class amfRegistrationLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil} to access the amf registration local service.
 	 */
+	private ArrayList<String> listErrors = new ArrayList<String>();
 
 	public void addAMFUser(AMFUser user) throws PortalException {
 
-		validationAMFUser(user);
+		if(validationAMFUser(user)){
+			throw new RegistrationException(listErrors);
+		}
 
 		String[] birthday = user.getBirthday().split("/");
 		int birthdayMonth = Integer.parseInt(birthday[0]);
 		int birthdayDay = Integer.parseInt(birthday[1]);
 		int birthdayYear = Integer.parseInt(birthday[2]);
 
+		/*
 		User userAMF = userLocalService.addUser(
 			0, user.getCompanyId(), false, user.getPassword1(), user.getPassword2(),false, user.getUsername(), user.getEmailAddress(), 0, null,
-			user.getLocale(), user.getFirtName(), "", user.getLastName(), 0, 0, "male".equals(user.getGender()), birthdayMonth, birthdayDay, birthdayYear,
+			user.getLocale(), user.getFirstName(), "", user.getLastName(), 0, 0, "male".equals(user.getGender()), birthdayMonth, birthdayDay, birthdayYear,
 			"", null, null, null, null, false, new ServiceContext()
 		);
 
 		Address address = addressLocalService.addAddress(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getAddress1(), user.getAddress2(), "",
 				user.getCity(), user.getZip(), 0, 19,11002, false, true, new ServiceContext());
 
-		Phone phone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getHomePhone(), null, 11011, true, new ServiceContext());
+		Phone Homephone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getHomePhone(), null, 11011, true, new ServiceContext());
+
+		Phone Mobilephone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getMobilePhone(), null, 11008, true, new ServiceContext());
+		*/
+	}
+
+	private boolean validationAMFUser(AMFUser user){
+		validateFirstName(user.getFirstName());
+		validateLastName(user.getLastName());
+
+		if(listErrors.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
 
 	}
 
-	private void validationAMFUser(AMFUser user){
-
+	private void validateFirstName(String name){
+		if(name.matches("^.*[^a-zA-Z0-9 ].*$") || name.length() > 50 || name == null || name == ""){
+ 			listErrors.add("InvalidFirstName");
+		}
 	}
 
+	private void validateLastName(String name){
+		if(name.matches("^.*[^a-zA-Z0-9 ].*$") || name.length() > 50 || name == null || name == ""){
+			listErrors.add("InvalidLastName");
+		}
+	}
 }
