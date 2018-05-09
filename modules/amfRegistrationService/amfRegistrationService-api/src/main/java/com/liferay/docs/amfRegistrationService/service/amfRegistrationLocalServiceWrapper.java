@@ -36,7 +36,7 @@ public class amfRegistrationLocalServiceWrapper
 
 	@Override
 	public void addAMFUser(
-		com.liferay.docs.amfRegistrationService.model.AMFUser user)
+		com.liferay.docs.amfRegistrationService.dto.AMFUser user)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			java.text.ParseException {
 		_amfRegistrationLocalService.addAMFUser(user);

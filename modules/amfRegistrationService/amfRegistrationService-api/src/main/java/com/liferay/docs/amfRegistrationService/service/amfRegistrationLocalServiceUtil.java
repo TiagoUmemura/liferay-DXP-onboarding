@@ -42,7 +42,7 @@ public class amfRegistrationLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static void addAMFUser(
-		com.liferay.docs.amfRegistrationService.model.AMFUser user)
+		com.liferay.docs.amfRegistrationService.dto.AMFUser user)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			java.text.ParseException {
 		getService().addAMFUser(user);

@@ -1,4 +1,4 @@
-package com.liferay.docs.amfRegistrationService.model;
+package com.liferay.docs.amfRegistrationService.dto;
 
 import java.util.Locale;
 

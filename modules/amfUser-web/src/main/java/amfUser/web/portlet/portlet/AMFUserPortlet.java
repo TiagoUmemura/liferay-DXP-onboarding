@@ -2,25 +2,21 @@ package amfUser.web.portlet.portlet;
 
 import amfUser.web.portlet.constants.AMFUserPortletKeys;
 
-import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
-import com.liferay.docs.amfRegistrationService.model.AMFUser;
-import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Country;
+import com.liferay.portal.kernel.model.Region;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.Portlet;
+import javax.portlet.*;
 
+import com.liferay.portal.kernel.service.CountryService;
+import com.liferay.portal.kernel.service.RegionService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import java.text.ParseException;
-import java.util.Locale;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author tiago
@@ -42,52 +38,30 @@ import java.util.Locale;
 public class AMFUserPortlet extends MVCPortlet {
 
 	@Reference
-	private volatile amfRegistrationLocalService _amfLocalService;
+	private volatile CountryService _countryService;
 
-	public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
+	private CountryService getCountryService() { return _countryService; }
 
-	public void addUser(ActionRequest request, ActionResponse response) {
-		String firtName = ParamUtil.getString(request, "first_name");
-		String lastName = ParamUtil.getString(request, "last_name");
-		String emailAddress = ParamUtil.getString(request, "email_address");
-		String username = ParamUtil.getString(request, "username");
-		String gender = ParamUtil.getString(request, "gender");
-		String birthday = ParamUtil.getString(request, "birthday");
-		String password1 = ParamUtil.getString(request, "password1");
-		String password2 = ParamUtil.getString(request, "password2");
+	@Reference
+	private volatile RegionService _regionService;
 
-		String homePhone = ParamUtil.getString(request, "home_phone");
-		String mobilePhone = ParamUtil.getString(request, "mobile_phone");
+	private RegionService getRegionService() { return _regionService; }
 
-		String address1 = ParamUtil.getString(request, "address1");
-		String address2 = ParamUtil.getString(request, "address2");
-		String city = ParamUtil.getString(request, "city");
-		String state = ParamUtil.getString(request, "state");
-		String zip = ParamUtil.getString(request, "zip");
-
-		String securityQuestion = ParamUtil.getString(request, "security_question");
-		String securityAnswer = ParamUtil.getString(request, "security_answer");
-		boolean acceptedTou = ParamUtil.getBoolean(request, "accepted_tou");
-
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		long companyId = themeDisplay.getCompanyId();
-		Locale locale = themeDisplay.getLocale();
-
-		AMFUser user = new AMFUser(firtName,lastName,emailAddress,username,gender,birthday,password1,password2,homePhone,mobilePhone,address1,address2,city,state,zip,securityQuestion,securityAnswer,acceptedTou, companyId, locale);
-
+	@Override
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		Country country = null;
 		try {
-			SessionErrors.clear(request);
-			getAmfLocalService().addAMFUser(user);
-		} catch (RegistrationException e) {
-			//Add error messages if there are invalid values on some field
-			for (String error: e.getErrors()) {
-				SessionErrors.add(request, error);
-			}
-		} catch (PortalException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
+			country = getCountryService().getCountryByA2("US");
+		} catch(PortalException ex) {
+			SessionErrors.add(renderRequest, "error");
+			super.render(renderRequest, renderResponse);
+			return;
 		}
 
+		List<Region> regions = getRegionService().getRegions(country.getCountryId());
+
+		renderRequest.setAttribute("regions", regions);
+
+		super.render(renderRequest, renderResponse);
 	}
 }

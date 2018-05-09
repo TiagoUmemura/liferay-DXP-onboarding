@@ -16,7 +16,7 @@ package com.liferay.docs.amfRegistrationService.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.docs.amfRegistrationService.model.AMFUser;
+import com.liferay.docs.amfRegistrationService.dto.AMFUser;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;

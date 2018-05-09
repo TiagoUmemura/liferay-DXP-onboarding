@@ -15,7 +15,7 @@
 package com.liferay.docs.amfRegistrationService.service.impl;
 
 import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
-import com.liferay.docs.amfRegistrationService.model.AMFUser;
+import com.liferay.docs.amfRegistrationService.dto.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Address;
@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -123,7 +122,7 @@ public class amfRegistrationLocalServiceImpl
 	}
 
 	private void validateEmail(String email){
-		if(email.matches("^.*[^a-zA-Z0-9 ].*$") || email.length() > 255 || email == null || email.equals("")){
+		if(!Validator.isEmailAddress(email) || email.length() > 255 || email == null || email.equals("")){
 			listErrors.add("InvalidEmail");
 		}
 	}
