@@ -1,0 +1,4 @@
+Bundle-Name: amf-event-monitor-web
+Bundle-SymbolicName: amf-event-monitor.web.portlet
+Bundle-Version: 1.0.0
+Export-Package: amf-event-monitor.web.portlet.constants
