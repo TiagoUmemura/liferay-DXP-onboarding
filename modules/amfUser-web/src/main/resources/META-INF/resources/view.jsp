@@ -1,3 +1,8 @@
+<%@ taglib prefix="aui" uri="http://liferay.com/tld/aui" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.liferay.portal.kernel.service.RegionServiceUtil" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.liferay.portal.kernel.model.Region" %>
 <%@ include file="/init.jsp" %>
 
 <p>
@@ -10,6 +15,8 @@
 
 <portlet:actionURL name="addUser" var="addUserURL"></portlet:actionURL>
 
+<% List<Region> regionList = RegionServiceUtil.getRegions(19); %>
+
 <liferay-ui:error key="InvalidFirstName" message="InvalidFirstName" />
 <liferay-ui:error key="InvalidLastName" message="InvalidLastName" />
 <liferay-ui:error key="InvalidEmail" message="InvalidEmail" />
@@ -17,6 +24,16 @@
 <liferay-ui:error key="InvalidBirthday" message="InvalidBirthday" />
 <liferay-ui:error key="InvalidHomePhone" message="InvalidHomePhone" />
 <liferay-ui:error key="InvalidMobilePhone" message="InvalidMobilePhone" />
+<liferay-ui:error key="InvalidAddress1" message="InvalidAddress1" />
+<liferay-ui:error key="InvalidAddress2" message="InvalidAddress2" />
+<liferay-ui:error key="InvalidState" message="InvalidState" />
+<liferay-ui:error key="InvalidCity" message="InvalidCity" />
+<liferay-ui:error key="InvalidZipCode" message="InvalidZipCode" />
+<liferay-ui:error key="InvalidSecurityQuestion" message="InvalidSecurityQuestion" />
+<liferay-ui:error key="InvalidSecurityAnswer" message="InvalidSecurityAnswer" />
+<liferay-ui:error key="InvalidAcceptedTou" message="InvalidAcceptedTou" />
+<liferay-ui:error key="InvalidPassword1" message="InvalidPassword1" />
+<liferay-ui:error key="InvalidPassword2" message="InvalidPassword2" />
 
 <aui:form action="<%= addUserURL %>" name="<portlet:namespace />fm">
 	<aui:fieldset>
@@ -46,7 +63,11 @@
 		<aui:input name="address1" label="Address1"></aui:input>
 		<aui:input name="address2" label="Address2"></aui:input>
 		<aui:input name="city" label="City"></aui:input>
-		<aui:input name="state" label="State"></aui:input>
+		<aui:select label="State" id="state" name="state" showEmptyOption="true">
+			<c:forEach var="region" items="<%= regionList %>">
+				<aui:option value="${region.getRegionId()}">${region.getName()}</aui:option>
+			</c:forEach>
+		</aui:select>
 		<aui:input name="zip" label="Zip Code"></aui:input>
 
 		</br>

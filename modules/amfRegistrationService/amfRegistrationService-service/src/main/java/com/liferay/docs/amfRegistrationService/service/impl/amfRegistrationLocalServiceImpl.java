@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.Phone;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -55,7 +56,7 @@ public class amfRegistrationLocalServiceImpl
 	private ArrayList<String> listErrors = new ArrayList<String>();
 
 	public void addAMFUser(AMFUser user) throws PortalException, ParseException {
-
+		//if true throw a exception to AMFUserPortlet
 		if(validationAMFUser(user)){
 			throw new RegistrationException(listErrors);
 		}
@@ -78,7 +79,7 @@ public class amfRegistrationLocalServiceImpl
 		Phone Homephone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getHomePhone(), null, 11011, true, new ServiceContext());
 
 		Phone Mobilephone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getMobilePhone(), null, 11008, true, new ServiceContext());
-		
+
 	}
 
 	private boolean validationAMFUser(AMFUser user) throws ParseException {
@@ -92,7 +93,14 @@ public class amfRegistrationLocalServiceImpl
 		validateMobilePhone(user.getMobilePhone());
 		validateAddress1(user.getAddress1());
 		validateAddress2(user.getAddress2());
+		validateState(user.getState());
 		validateCity(user.getCity());
+		validateZipCode(user.getZip());
+		validateSecurityQuestion(user.getSecurityQuestion());
+		validateSecurityAnswer(user.getSecurityAnswer());
+		validateTermsOfUse(user.isAcceptedTou());
+		validatePassword2(user.getPassword1(), user.getPassword2());
+		validatePassword1(user.getPassword1());
 
 		if(listErrors.isEmpty()){
 			return false;
@@ -103,25 +111,25 @@ public class amfRegistrationLocalServiceImpl
 	}
 
 	private void validateFirstName(String name){
-		if(name.matches("^.*[^a-zA-Z0-9 ].*$") || name.length() > 50 || name == null || name == ""){
+		if(name.matches("^.*[^a-zA-Z0-9 ].*$") || name.length() > 50 || name == null || name.equals("")){
  			listErrors.add("InvalidFirstName");
 		}
 	}
 
 	private void validateLastName(String lastname){
-		if(lastname.matches("^.*[^a-zA-Z0-9 ].*$") || lastname.length() > 50 || lastname == null || lastname == ""){
+		if(lastname.matches("^.*[^a-zA-Z0-9 ].*$") || lastname.length() > 50 || lastname == null || lastname.equals("")){
 			listErrors.add("InvalidLastName");
 		}
 	}
 
 	private void validateEmail(String email){
-		if(email.matches("^.*[^a-zA-Z0-9 ].*$") || email.length() > 255 || email == null || email == ""){
+		if(email.matches("^.*[^a-zA-Z0-9 ].*$") || email.length() > 255 || email == null || email.equals("")){
 			listErrors.add("InvalidEmail");
 		}
 	}
 
 	private void validateUserName(String userName){
-		if(userName.matches("^.*[^a-zA-Z0-9 ].*$") || (userName.length() >= 4 && userName.length() <= 16) || userName == null || userName == ""){
+		if(userName.matches("^.*[^a-zA-Z0-9 ].*$") || userName.length() < 4 || userName.length() > 16 || userName == null || userName.equals("")){
 			listErrors.add("InvalidUserName");
 		}
 	}
@@ -141,32 +149,75 @@ public class amfRegistrationLocalServiceImpl
 	}
 
 	private void validateHomePhone(String homePhone){
-		if(!homePhone.matches("[0-9]+") || (homePhone.length() != 10) || homePhone == null || homePhone == ""){
+		if(!Validator.isNumber(homePhone) || (homePhone.length() != 10) || homePhone == null || homePhone.equals("")){
 			listErrors.add("InvalidHomePhone");
 		}
 	}
 
 	private void validateMobilePhone(String mobilePhone){
-		if(!mobilePhone.matches("[0-9]+") || (mobilePhone.length() != 10) || mobilePhone == null || mobilePhone == ""){
+		if(!Validator.isNumber(mobilePhone) || (mobilePhone.length() != 10) || mobilePhone == null || mobilePhone.equals("")){
 			listErrors.add("InvalidMobilePhone");
 		}
 	}
 
 	private void validateAddress1(String address1){
-		if(address1.matches("^.*[^a-zA-Z0-9 ].*$") || address1.length() > 255 || address1 == null || address1 == ""){
+		if(address1.matches("^.*[^a-zA-Z0-9 ].*$") || address1.length() > 255 || address1 == null || address1.equals("")){
 			listErrors.add("InvalidAddress1");
 		}
 	}
 
 	private void validateAddress2(String address2){
-		if(address2.matches("^.*[^a-zA-Z0-9 ].*$") || address2.length() > 255 || address2 == null || address2 == ""){
+		if(address2.matches("^.*[^a-zA-Z0-9 ].*$") || address2.length() > 255){
 			listErrors.add("InvalidAddress2");
 		}
 	}
 
 	private void validateCity(String city){
-		if(city.matches("^.*[^a-zA-Z0-9 ].*$") || city.length() > 255 || city == null || city == ""){
+		if(city.matches("^.*[^a-zA-Z0-9 ].*$") || city.length() > 255 || city == null || city.equals("")){
 			listErrors.add("InvalidCity");
+		}
+	}
+
+	private void validateZipCode(String zipCode){
+		if(!Validator.isNumber(zipCode) || zipCode.length() != 5){
+			listErrors.add("InvalidZipCode");
+		}
+	}
+
+	private void validateSecurityQuestion(String securityQuestion){
+		if(securityQuestion == null || securityQuestion.equals("")){
+			listErrors.add("InvalidSecurityQuestion");
+		}
+	}
+
+	private void validateSecurityAnswer(String securityAnswer){
+		if(securityAnswer == null || securityAnswer.equals("")){
+			listErrors.add("InvalidSecurityAnswer");
+		}
+	}
+
+	private void validateTermsOfUse (boolean acceptedTou){
+		if(acceptedTou == false){
+			listErrors.add("InvalidAcceptedTou");
+		}
+	}
+
+	private void validatePassword2(String password1, String password2){
+		if(!password1.equals(password2)){
+			listErrors.add("InvalidPassword2");
+		}
+	}
+
+	private void validatePassword1(String password1){
+		if(!password1.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")){
+			listErrors.add("InvalidPassword1");
+		}
+
+	}
+
+	private void validateState(String state){
+		if(state == null || state.equals("")){
+			listErrors.add("InvalidState");
 		}
 	}
 
