@@ -47,6 +47,7 @@ public class AMFUserPortlet extends MVCPortlet {
 
 	private RegionService getRegionService() { return _regionService; }
 
+
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		Country country = null;

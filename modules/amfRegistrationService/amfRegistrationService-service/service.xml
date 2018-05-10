@@ -10,4 +10,36 @@
 		<reference entity="Address" package-path="com.liferay.portal" />
 		<reference entity="Phone" package-path="com.liferay.portal" />
 	</entity>
+
+	<entity name="AmfAuditLog" table="AmfAuditLog" local-service="true" remote-service="false" uuid="false">
+		<column db-name="amfAuditLogId" name="amfAuditLogId" primary="true" type="long" id-type="increment"/>
+		<column db-name="userId" name="userId" type="String" />
+		<column db-name="userName" name="userName" type="String" />
+		<column db-name="dateTime" name="dateTime" type="Date" />
+		<column db-name="eventType" name="eventType" type="String" />
+		<column db-name="ipAddress" name="ipAddress" type="String" />
+
+		<order by="desc">
+			<order-column name="dateTime"/>
+		</order>
+
+		<finder name="userName" return-type="Collection">
+			<finder-column name="userName"/>
+		</finder>
+
+		<finder name="eventType" return-type="Collection">
+			<finder-column name="eventType" arrayable-operator="OR" />
+		</finder>
+
+		<finder name="EventTypeAndUserName" return-type="Collection">
+			<finder-column name="eventType"/>
+			<finder-column name="userName"/>
+		</finder>
+
+		<finder name="EventTypeAndUserId" return-type="Collection">
+			<finder-column name="eventType" arrayable-operator="OR" />
+			<finder-column name="userId"/>
+		</finder>
+	</entity>
+
 </service-builder>

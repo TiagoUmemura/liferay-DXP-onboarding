@@ -1,0 +1,8 @@
+<custom-sql>
+    <sql id="[allEventsLog]">
+        <![CDATA[
+            select auditEventId, userName, createDate, eventType, clientHost
+            from Audit_AuditEvent
+        ]]>
+    </sql>
+</custom-sql>

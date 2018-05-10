@@ -17,6 +17,7 @@ package com.liferay.docs.amfRegistrationService.service.base;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
+import com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -57,6 +58,44 @@ public abstract class amfRegistrationLocalServiceBaseImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil} to access the amf registration local service.
 	 */
+
+	/**
+	 * Returns the amf audit log local service.
+	 *
+	 * @return the amf audit log local service
+	 */
+	public com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService getAmfAuditLogLocalService() {
+		return amfAuditLogLocalService;
+	}
+
+	/**
+	 * Sets the amf audit log local service.
+	 *
+	 * @param amfAuditLogLocalService the amf audit log local service
+	 */
+	public void setAmfAuditLogLocalService(
+		com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService amfAuditLogLocalService) {
+		this.amfAuditLogLocalService = amfAuditLogLocalService;
+	}
+
+	/**
+	 * Returns the amf audit log persistence.
+	 *
+	 * @return the amf audit log persistence
+	 */
+	public AmfAuditLogPersistence getAmfAuditLogPersistence() {
+		return amfAuditLogPersistence;
+	}
+
+	/**
+	 * Sets the amf audit log persistence.
+	 *
+	 * @param amfAuditLogPersistence the amf audit log persistence
+	 */
+	public void setAmfAuditLogPersistence(
+		AmfAuditLogPersistence amfAuditLogPersistence) {
+		this.amfAuditLogPersistence = amfAuditLogPersistence;
+	}
 
 	/**
 	 * Returns the amf registration local service.
@@ -304,6 +343,10 @@ public abstract class amfRegistrationLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService.class)
+	protected com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService amfAuditLogLocalService;
+	@BeanReference(type = AmfAuditLogPersistence.class)
+	protected AmfAuditLogPersistence amfAuditLogPersistence;
 	@BeanReference(type = amfRegistrationLocalService.class)
 	protected amfRegistrationLocalService amfRegistrationLocalService;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)

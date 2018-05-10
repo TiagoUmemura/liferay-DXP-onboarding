@@ -18,6 +18,7 @@ import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
 import com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.Phone;
@@ -30,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the amf registration local service.
@@ -219,5 +221,8 @@ public class amfRegistrationLocalServiceImpl
 			listErrors.add("InvalidState");
 		}
 	}
+
+
+	public static final String FIND_ALL_EVENTS = "allEventsLog";
 
 }

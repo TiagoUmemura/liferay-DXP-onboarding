@@ -1,3 +1,12 @@
 <?xml version="1.0"?>
 
-<model-hints></model-hints>
+<model-hints>
+	<model name="com.liferay.docs.amfRegistrationService.model.AmfAuditLog">
+		<field name="amfAuditLogId" type="long" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="dateTime" type="Date" />
+		<field name="eventType" type="String" />
+		<field name="ipAddress" type="String" />
+	</model>
+</model-hints>

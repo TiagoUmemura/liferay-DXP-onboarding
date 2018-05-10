@@ -1,12 +1,13 @@
-package amf-event-monitor.web.portlet.portlet;
+package amfEventMonitor.web.portlet.portlet;
 
-import amf-event-monitor.web.portlet.constants.AmfEventMonitorPortletKeys;
+import amfEventMonitor.web.portlet.constants.AmfEventMonitorPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author tiago
@@ -26,5 +27,5 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class AmfEventMonitorPortlet extends MVCPortlet {
-	
+
 }

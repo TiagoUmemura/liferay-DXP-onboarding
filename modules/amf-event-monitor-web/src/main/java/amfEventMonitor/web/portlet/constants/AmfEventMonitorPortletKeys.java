@@ -1,4 +1,4 @@
-package amf-event-monitor.web.portlet.constants;
+package amfEventMonitor.web.portlet.constants;
 
 /**
  * @author tiago

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="com.liferay.docs.amfRegistrationService.model.AmfAuditLog" />
+	<class name="com.liferay.docs.amfRegistrationService.model.impl.AmfAuditLogImpl" table="AmfAuditLog">
+		<id name="amfAuditLogId" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dateTime" type="org.hibernate.type.TimestampType" />
+		<property name="eventType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ipAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
