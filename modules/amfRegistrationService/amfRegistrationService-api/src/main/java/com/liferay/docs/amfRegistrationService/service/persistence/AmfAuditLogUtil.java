@@ -717,7 +717,7 @@ public class AmfAuditLogUtil {
 	* @return the matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId) {
+		java.lang.String eventType, long userId) {
 		return getPersistence().findByEventTypeAndUserId(eventType, userId);
 	}
 
@@ -735,7 +735,7 @@ public class AmfAuditLogUtil {
 	* @return the range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start, int end) {
+		java.lang.String eventType, long userId, int start, int end) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventType, userId, start, end);
 	}
@@ -755,8 +755,8 @@ public class AmfAuditLogUtil {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator) {
+		java.lang.String eventType, long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventType, userId, start, end,
 			orderByComparator);
@@ -778,8 +778,8 @@ public class AmfAuditLogUtil {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator,
+		java.lang.String eventType, long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventType, userId, start, end,
@@ -796,7 +796,7 @@ public class AmfAuditLogUtil {
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
 	public static AmfAuditLog findByEventTypeAndUserId_First(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
 		return getPersistence()
@@ -813,7 +813,7 @@ public class AmfAuditLogUtil {
 	* @return the first matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
 	public static AmfAuditLog fetchByEventTypeAndUserId_First(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return getPersistence()
 				   .fetchByEventTypeAndUserId_First(eventType, userId,
@@ -830,7 +830,7 @@ public class AmfAuditLogUtil {
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
 	public static AmfAuditLog findByEventTypeAndUserId_Last(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
 		return getPersistence()
@@ -847,7 +847,7 @@ public class AmfAuditLogUtil {
 	* @return the last matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
 	public static AmfAuditLog fetchByEventTypeAndUserId_Last(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return getPersistence()
 				   .fetchByEventTypeAndUserId_Last(eventType, userId,
@@ -865,8 +865,7 @@ public class AmfAuditLogUtil {
 	* @throws NoSuchAmfAuditLogException if a amf audit log with the primary key could not be found
 	*/
 	public static AmfAuditLog[] findByEventTypeAndUserId_PrevAndNext(
-		long amfAuditLogId, java.lang.String eventType,
-		java.lang.String userId,
+		long amfAuditLogId, java.lang.String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
 		return getPersistence()
@@ -886,7 +885,7 @@ public class AmfAuditLogUtil {
 	* @return the matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId) {
+		java.lang.String[] eventTypes, long userId) {
 		return getPersistence().findByEventTypeAndUserId(eventTypes, userId);
 	}
 
@@ -904,8 +903,7 @@ public class AmfAuditLogUtil {
 	* @return the range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end) {
+		java.lang.String[] eventTypes, long userId, int start, int end) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventTypes, userId, start, end);
 	}
@@ -925,8 +923,8 @@ public class AmfAuditLogUtil {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator) {
+		java.lang.String[] eventTypes, long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventTypes, userId, start, end,
 			orderByComparator);
@@ -948,8 +946,8 @@ public class AmfAuditLogUtil {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public static List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator,
+		java.lang.String[] eventTypes, long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
 				   .findByEventTypeAndUserId(eventTypes, userId, start, end,
@@ -963,7 +961,7 @@ public class AmfAuditLogUtil {
 	* @param userId the user ID
 	*/
 	public static void removeByEventTypeAndUserId(java.lang.String eventType,
-		java.lang.String userId) {
+		long userId) {
 		getPersistence().removeByEventTypeAndUserId(eventType, userId);
 	}
 
@@ -975,7 +973,7 @@ public class AmfAuditLogUtil {
 	* @return the number of matching amf audit logs
 	*/
 	public static int countByEventTypeAndUserId(java.lang.String eventType,
-		java.lang.String userId) {
+		long userId) {
 		return getPersistence().countByEventTypeAndUserId(eventType, userId);
 	}
 
@@ -987,7 +985,7 @@ public class AmfAuditLogUtil {
 	* @return the number of matching amf audit logs
 	*/
 	public static int countByEventTypeAndUserId(java.lang.String[] eventTypes,
-		java.lang.String userId) {
+		long userId) {
 		return getPersistence().countByEventTypeAndUserId(eventTypes, userId);
 	}
 

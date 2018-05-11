@@ -99,11 +99,11 @@ public class AmfAuditLogSoap implements Serializable {
 		_amfAuditLogId = amfAuditLogId;
 	}
 
-	public String getUserId() {
+	public long getUserId() {
 		return _userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
@@ -140,7 +140,7 @@ public class AmfAuditLogSoap implements Serializable {
 	}
 
 	private long _amfAuditLogId;
-	private String _userId;
+	private long _userId;
 	private String _userName;
 	private Date _dateTime;
 	private String _eventType;

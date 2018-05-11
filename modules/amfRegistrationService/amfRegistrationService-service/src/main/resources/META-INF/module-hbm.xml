@@ -7,7 +7,7 @@
 		<id name="amfAuditLogId" type="long">
 			<generator class="increment" />
 		</id>
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dateTime" type="org.hibernate.type.TimestampType" />
 		<property name="eventType" type="com.liferay.portal.dao.orm.hibernate.StringType" />

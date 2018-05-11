@@ -53,6 +53,11 @@ public class AmfAuditLogLocalServiceUtil {
 		return getService().addAmfAuditLog(amfAuditLog);
 	}
 
+	public static void addAuditLogEvent(
+		com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO amfAuditLogDTO) {
+		getService().addAuditLogEvent(amfAuditLogDTO);
+	}
+
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.
 	*

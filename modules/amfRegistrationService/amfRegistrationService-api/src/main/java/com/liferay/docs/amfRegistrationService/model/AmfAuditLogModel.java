@@ -81,15 +81,28 @@ public interface AmfAuditLogModel extends BaseModel<AmfAuditLog> {
 	 *
 	 * @return the user ID of this amf audit log
 	 */
-	@AutoEscape
-	public String getUserId();
+	public long getUserId();
 
 	/**
 	 * Sets the user ID of this amf audit log.
 	 *
 	 * @param userId the user ID of this amf audit log
 	 */
-	public void setUserId(String userId);
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this amf audit log.
+	 *
+	 * @return the user uuid of this amf audit log
+	 */
+	public String getUserUuid();
+
+	/**
+	 * Sets the user uuid of this amf audit log.
+	 *
+	 * @param userUuid the user uuid of this amf audit log
+	 */
+	public void setUserUuid(String userUuid);
 
 	/**
 	 * Returns the user name of this amf audit log.

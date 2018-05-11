@@ -14,6 +14,10 @@
 
 package com.liferay.docs.amfRegistrationService.service.impl;
 
+import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
+import com.liferay.docs.amfRegistrationService.model.AmfAuditLog;
+import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService;
+import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil;
 import com.liferay.docs.amfRegistrationService.service.base.AmfAuditLogLocalServiceBaseImpl;
 
 /**
@@ -36,4 +40,16 @@ public class AmfAuditLogLocalServiceImpl extends AmfAuditLogLocalServiceBaseImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil} to access the amf audit log local service.
 	 */
+
+	public void addAuditLogEvent(AmfAuditLogDTO amfAuditLogDTO){
+		AmfAuditLog amfAuditLog = AmfAuditLogLocalServiceUtil.createAmfAuditLog(0);
+
+		amfAuditLog.setUserId(amfAuditLogDTO.getUserId());
+		amfAuditLog.setUserName(amfAuditLogDTO.getUserName());
+		amfAuditLog.setIpAddress(amfAuditLogDTO.getIpAddress());
+		amfAuditLog.setDateTime(amfAuditLogDTO.getDateTime());
+		amfAuditLog.setEventType(amfAuditLogDTO.getEventType());
+
+		AmfAuditLogLocalServiceUtil.updateAmfAuditLog(amfAuditLog);
+	}
 }

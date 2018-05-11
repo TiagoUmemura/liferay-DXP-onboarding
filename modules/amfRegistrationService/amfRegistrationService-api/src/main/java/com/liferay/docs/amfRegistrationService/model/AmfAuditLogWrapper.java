@@ -76,7 +76,7 @@ public class AmfAuditLogWrapper implements AmfAuditLog,
 			setAmfAuditLogId(amfAuditLogId);
 		}
 
-		String userId = (String)attributes.get("userId");
+		Long userId = (Long)attributes.get("userId");
 
 		if (userId != null) {
 			setUserId(userId);
@@ -183,7 +183,7 @@ public class AmfAuditLogWrapper implements AmfAuditLog,
 	* @return the user ID of this amf audit log
 	*/
 	@Override
-	public java.lang.String getUserId() {
+	public long getUserId() {
 		return _amfAuditLog.getUserId();
 	}
 
@@ -195,6 +195,16 @@ public class AmfAuditLogWrapper implements AmfAuditLog,
 	@Override
 	public java.lang.String getUserName() {
 		return _amfAuditLog.getUserName();
+	}
+
+	/**
+	* Returns the user uuid of this amf audit log.
+	*
+	* @return the user uuid of this amf audit log
+	*/
+	@Override
+	public java.lang.String getUserUuid() {
+		return _amfAuditLog.getUserUuid();
 	}
 
 	@Override
@@ -309,7 +319,7 @@ public class AmfAuditLogWrapper implements AmfAuditLog,
 	* @param userId the user ID of this amf audit log
 	*/
 	@Override
-	public void setUserId(java.lang.String userId) {
+	public void setUserId(long userId) {
 		_amfAuditLog.setUserId(userId);
 	}
 
@@ -321,6 +331,16 @@ public class AmfAuditLogWrapper implements AmfAuditLog,
 	@Override
 	public void setUserName(java.lang.String userName) {
 		_amfAuditLog.setUserName(userName);
+	}
+
+	/**
+	* Sets the user uuid of this amf audit log.
+	*
+	* @param userUuid the user uuid of this amf audit log
+	*/
+	@Override
+	public void setUserUuid(java.lang.String userUuid) {
+		_amfAuditLog.setUserUuid(userUuid);
 	}
 
 	@Override

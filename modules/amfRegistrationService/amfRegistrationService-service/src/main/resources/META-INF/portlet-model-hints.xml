@@ -3,7 +3,7 @@
 <model-hints>
 	<model name="com.liferay.docs.amfRegistrationService.model.AmfAuditLog">
 		<field name="amfAuditLogId" type="long" />
-		<field name="userId" type="String" />
+		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="dateTime" type="Date" />
 		<field name="eventType" type="String" />

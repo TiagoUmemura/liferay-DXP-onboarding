@@ -16,6 +16,7 @@ package com.liferay.docs.amfRegistrationService.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
 import com.liferay.docs.amfRegistrationService.model.AmfAuditLog;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -69,6 +70,8 @@ public interface AmfAuditLogLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public AmfAuditLog addAmfAuditLog(AmfAuditLog amfAuditLog);
+
+	public void addAuditLogEvent(AmfAuditLogDTO amfAuditLogDTO);
 
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.

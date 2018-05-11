@@ -540,7 +540,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId);
+		java.lang.String eventType, long userId);
 
 	/**
 	* Returns a range of all the amf audit logs where eventType = &#63; and userId = &#63;.
@@ -556,7 +556,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start, int end);
+		java.lang.String eventType, long userId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the amf audit logs where eventType = &#63; and userId = &#63;.
@@ -573,8 +573,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start,
-		int end,
+		java.lang.String eventType, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator);
 
 	/**
@@ -593,8 +592,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String eventType, java.lang.String userId, int start,
-		int end,
+		java.lang.String eventType, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache);
 
@@ -608,7 +606,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
 	public AmfAuditLog findByEventTypeAndUserId_First(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException;
 
@@ -621,7 +619,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the first matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
 	public AmfAuditLog fetchByEventTypeAndUserId_First(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator);
 
 	/**
@@ -634,7 +632,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
 	public AmfAuditLog findByEventTypeAndUserId_Last(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException;
 
@@ -647,7 +645,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the last matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
 	public AmfAuditLog fetchByEventTypeAndUserId_Last(
-		java.lang.String eventType, java.lang.String userId,
+		java.lang.String eventType, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator);
 
 	/**
@@ -661,8 +659,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @throws NoSuchAmfAuditLogException if a amf audit log with the primary key could not be found
 	*/
 	public AmfAuditLog[] findByEventTypeAndUserId_PrevAndNext(
-		long amfAuditLogId, java.lang.String eventType,
-		java.lang.String userId,
+		long amfAuditLogId, java.lang.String eventType, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException;
 
@@ -678,7 +675,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId);
+		java.lang.String[] eventTypes, long userId);
 
 	/**
 	* Returns a range of all the amf audit logs where eventType = any &#63; and userId = &#63;.
@@ -694,8 +691,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end);
+		java.lang.String[] eventTypes, long userId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the amf audit logs where eventType = any &#63; and userId = &#63;.
@@ -712,8 +708,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end,
+		java.lang.String[] eventTypes, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator);
 
 	/**
@@ -732,8 +727,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the ordered range of matching amf audit logs
 	*/
 	public java.util.List<AmfAuditLog> findByEventTypeAndUserId(
-		java.lang.String[] eventTypes, java.lang.String userId, int start,
-		int end,
+		java.lang.String[] eventTypes, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache);
 
@@ -744,7 +738,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @param userId the user ID
 	*/
 	public void removeByEventTypeAndUserId(java.lang.String eventType,
-		java.lang.String userId);
+		long userId);
 
 	/**
 	* Returns the number of amf audit logs where eventType = &#63; and userId = &#63;.
@@ -753,8 +747,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @param userId the user ID
 	* @return the number of matching amf audit logs
 	*/
-	public int countByEventTypeAndUserId(java.lang.String eventType,
-		java.lang.String userId);
+	public int countByEventTypeAndUserId(java.lang.String eventType, long userId);
 
 	/**
 	* Returns the number of amf audit logs where eventType = any &#63; and userId = &#63;.
@@ -764,7 +757,7 @@ public interface AmfAuditLogPersistence extends BasePersistence<AmfAuditLog> {
 	* @return the number of matching amf audit logs
 	*/
 	public int countByEventTypeAndUserId(java.lang.String[] eventTypes,
-		java.lang.String userId);
+		long userId);
 
 	/**
 	* Caches the amf audit log in the entity cache if it is enabled.

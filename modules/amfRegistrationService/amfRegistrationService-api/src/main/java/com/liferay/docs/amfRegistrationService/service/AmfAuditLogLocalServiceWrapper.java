@@ -45,6 +45,12 @@ public class AmfAuditLogLocalServiceWrapper implements AmfAuditLogLocalService,
 		return _amfAuditLogLocalService.addAmfAuditLog(amfAuditLog);
 	}
 
+	@Override
+	public void addAuditLogEvent(
+		com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO amfAuditLogDTO) {
+		_amfAuditLogLocalService.addAuditLogEvent(amfAuditLogDTO);
+	}
+
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.
 	*

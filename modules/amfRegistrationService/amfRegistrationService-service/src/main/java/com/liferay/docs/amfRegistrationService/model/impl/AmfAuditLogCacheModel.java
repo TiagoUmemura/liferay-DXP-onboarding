@@ -90,13 +90,7 @@ public class AmfAuditLogCacheModel implements CacheModel<AmfAuditLog>,
 		AmfAuditLogImpl amfAuditLogImpl = new AmfAuditLogImpl();
 
 		amfAuditLogImpl.setAmfAuditLogId(amfAuditLogId);
-
-		if (userId == null) {
-			amfAuditLogImpl.setUserId(StringPool.BLANK);
-		}
-		else {
-			amfAuditLogImpl.setUserId(userId);
-		}
+		amfAuditLogImpl.setUserId(userId);
 
 		if (userName == null) {
 			amfAuditLogImpl.setUserName(StringPool.BLANK);
@@ -134,7 +128,8 @@ public class AmfAuditLogCacheModel implements CacheModel<AmfAuditLog>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		amfAuditLogId = objectInput.readLong();
-		userId = objectInput.readUTF();
+
+		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		dateTime = objectInput.readLong();
 		eventType = objectInput.readUTF();
@@ -146,12 +141,7 @@ public class AmfAuditLogCacheModel implements CacheModel<AmfAuditLog>,
 		throws IOException {
 		objectOutput.writeLong(amfAuditLogId);
 
-		if (userId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(userId);
-		}
+		objectOutput.writeLong(userId);
 
 		if (userName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -178,7 +168,7 @@ public class AmfAuditLogCacheModel implements CacheModel<AmfAuditLog>,
 	}
 
 	public long amfAuditLogId;
-	public String userId;
+	public long userId;
 	public String userName;
 	public long dateTime;
 	public String eventType;

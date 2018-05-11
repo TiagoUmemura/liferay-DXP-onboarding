@@ -23,9 +23,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -64,7 +67,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 	public static final String TABLE_NAME = "AmfAuditLog";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "amfAuditLogId", Types.BIGINT },
-			{ "userId", Types.VARCHAR },
+			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "dateTime", Types.TIMESTAMP },
 			{ "eventType", Types.VARCHAR },
@@ -74,14 +77,14 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 
 	static {
 		TABLE_COLUMNS_MAP.put("amfAuditLogId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("userId", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("dateTime", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("eventType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("ipAddress", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table AmfAuditLog (amfAuditLogId LONG not null primary key,userId VARCHAR(75) null,userName VARCHAR(75) null,dateTime DATE null,eventType VARCHAR(75) null,ipAddress VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table AmfAuditLog (amfAuditLogId LONG not null primary key,userId LONG,userName VARCHAR(75) null,dateTime DATE null,eventType VARCHAR(75) null,ipAddress VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table AmfAuditLog";
 	public static final String ORDER_BY_JPQL = " ORDER BY amfAuditLog.dateTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY AmfAuditLog.dateTime DESC";
@@ -162,7 +165,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 			setAmfAuditLogId(amfAuditLogId);
 		}
 
-		String userId = (String)attributes.get("userId");
+		Long userId = (Long)attributes.get("userId");
 
 		if (userId != null) {
 			setUserId(userId);
@@ -204,28 +207,41 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 	}
 
 	@Override
-	public String getUserId() {
-		if (_userId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _userId;
-		}
+	public long getUserId() {
+		return _userId;
 	}
 
 	@Override
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
-		if (_originalUserId == null) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
 			_originalUserId = _userId;
 		}
 
 		_userId = userId;
 	}
 
-	public String getOriginalUserId() {
-		return GetterUtil.getString(_originalUserId);
+	@Override
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@Override
@@ -406,6 +422,8 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 
 		amfAuditLogModelImpl._originalUserId = amfAuditLogModelImpl._userId;
 
+		amfAuditLogModelImpl._setOriginalUserId = false;
+
 		amfAuditLogModelImpl._originalUserName = amfAuditLogModelImpl._userName;
 
 		amfAuditLogModelImpl._originalEventType = amfAuditLogModelImpl._eventType;
@@ -420,12 +438,6 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		amfAuditLogCacheModel.amfAuditLogId = getAmfAuditLogId();
 
 		amfAuditLogCacheModel.userId = getUserId();
-
-		String userId = amfAuditLogCacheModel.userId;
-
-		if ((userId != null) && (userId.length() == 0)) {
-			amfAuditLogCacheModel.userId = null;
-		}
 
 		amfAuditLogCacheModel.userName = getUserName();
 
@@ -527,8 +539,9 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 			AmfAuditLog.class
 		};
 	private long _amfAuditLogId;
-	private String _userId;
-	private String _originalUserId;
+	private long _userId;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private String _originalUserName;
 	private Date _dateTime;

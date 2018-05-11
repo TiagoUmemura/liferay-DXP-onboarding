@@ -2135,7 +2135,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, AmfAuditLogImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByEventTypeAndUserId",
 			new String[] {
-				String.class.getName(), String.class.getName(),
+				String.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -2145,7 +2145,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, AmfAuditLogImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByEventTypeAndUserId",
-			new String[] { String.class.getName(), String.class.getName() },
+			new String[] { String.class.getName(), Long.class.getName() },
 			AmfAuditLogModelImpl.EVENTTYPE_COLUMN_BITMASK |
 			AmfAuditLogModelImpl.USERID_COLUMN_BITMASK |
 			AmfAuditLogModelImpl.DATETIME_COLUMN_BITMASK);
@@ -2153,13 +2153,13 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByEventTypeAndUserId",
-			new String[] { String.class.getName(), String.class.getName() });
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_COUNT_BY_EVENTTYPEANDUSERID =
 		new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"countByEventTypeAndUserId",
-			new String[] { String.class.getName(), String.class.getName() });
+			new String[] { String.class.getName(), Long.class.getName() });
 
 	/**
 	 * Returns all the amf audit logs where eventType = &#63; and userId = &#63;.
@@ -2170,7 +2170,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String eventType,
-		String userId) {
+		long userId) {
 		return findByEventTypeAndUserId(eventType, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -2190,7 +2190,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String eventType,
-		String userId, int start, int end) {
+		long userId, int start, int end) {
 		return findByEventTypeAndUserId(eventType, userId, start, end, null);
 	}
 
@@ -2210,7 +2210,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String eventType,
-		String userId, int start, int end,
+		long userId, int start, int end,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return findByEventTypeAndUserId(eventType, userId, start, end,
 			orderByComparator, true);
@@ -2233,7 +2233,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String eventType,
-		String userId, int start, int end,
+		long userId, int start, int end,
 		OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -2264,7 +2264,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			if ((list != null) && !list.isEmpty()) {
 				for (AmfAuditLog amfAuditLog : list) {
 					if (!Objects.equals(eventType, amfAuditLog.getEventType()) ||
-							!Objects.equals(userId, amfAuditLog.getUserId())) {
+							(userId != amfAuditLog.getUserId())) {
 						list = null;
 
 						break;
@@ -2300,19 +2300,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_2);
 			}
 
-			boolean bindUserId = false;
-
-			if (userId == null) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1);
-			}
-			else if (userId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3);
-			}
-			else {
-				bindUserId = true;
-
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
-			}
+			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2338,9 +2326,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 					qPos.add(eventType);
 				}
 
-				if (bindUserId) {
-					qPos.add(userId);
-				}
+				qPos.add(userId);
 
 				if (!pagination) {
 					list = (List<AmfAuditLog>)QueryUtil.list(q, getDialect(),
@@ -2383,7 +2369,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public AmfAuditLog findByEventTypeAndUserId_First(String eventType,
-		String userId, OrderByComparator<AmfAuditLog> orderByComparator)
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
 		AmfAuditLog amfAuditLog = fetchByEventTypeAndUserId_First(eventType,
 				userId, orderByComparator);
@@ -2417,7 +2403,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public AmfAuditLog fetchByEventTypeAndUserId_First(String eventType,
-		String userId, OrderByComparator<AmfAuditLog> orderByComparator) {
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator) {
 		List<AmfAuditLog> list = findByEventTypeAndUserId(eventType, userId, 0,
 				1, orderByComparator);
 
@@ -2439,7 +2425,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public AmfAuditLog findByEventTypeAndUserId_Last(String eventType,
-		String userId, OrderByComparator<AmfAuditLog> orderByComparator)
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
 		AmfAuditLog amfAuditLog = fetchByEventTypeAndUserId_Last(eventType,
 				userId, orderByComparator);
@@ -2473,7 +2459,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public AmfAuditLog fetchByEventTypeAndUserId_Last(String eventType,
-		String userId, OrderByComparator<AmfAuditLog> orderByComparator) {
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator) {
 		int count = countByEventTypeAndUserId(eventType, userId);
 
 		if (count == 0) {
@@ -2502,7 +2488,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public AmfAuditLog[] findByEventTypeAndUserId_PrevAndNext(
-		long amfAuditLogId, String eventType, String userId,
+		long amfAuditLogId, String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
 		AmfAuditLog amfAuditLog = findByPrimaryKey(amfAuditLogId);
@@ -2533,7 +2519,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	protected AmfAuditLog getByEventTypeAndUserId_PrevAndNext(Session session,
-		AmfAuditLog amfAuditLog, String eventType, String userId,
+		AmfAuditLog amfAuditLog, String eventType, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2562,19 +2548,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_2);
 		}
 
-		boolean bindUserId = false;
-
-		if (userId == null) {
-			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1);
-		}
-		else if (userId.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3);
-		}
-		else {
-			bindUserId = true;
-
-			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
-		}
+		query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2648,9 +2622,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 			qPos.add(eventType);
 		}
 
-		if (bindUserId) {
-			qPos.add(userId);
-		}
+		qPos.add(userId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(amfAuditLog);
@@ -2683,7 +2655,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String[] eventTypes,
-		String userId) {
+		long userId) {
 		return findByEventTypeAndUserId(eventTypes, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -2703,7 +2675,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String[] eventTypes,
-		String userId, int start, int end) {
+		long userId, int start, int end) {
 		return findByEventTypeAndUserId(eventTypes, userId, start, end, null);
 	}
 
@@ -2723,7 +2695,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String[] eventTypes,
-		String userId, int start, int end,
+		long userId, int start, int end,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
 		return findByEventTypeAndUserId(eventTypes, userId, start, end,
 			orderByComparator, true);
@@ -2746,7 +2718,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 */
 	@Override
 	public List<AmfAuditLog> findByEventTypeAndUserId(String[] eventTypes,
-		String userId, int start, int end,
+		long userId, int start, int end,
 		OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		if (eventTypes == null) {
@@ -2790,7 +2762,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 				for (AmfAuditLog amfAuditLog : list) {
 					if (!ArrayUtil.contains(eventTypes,
 								amfAuditLog.getEventType()) ||
-							!Objects.equals(userId, amfAuditLog.getUserId())) {
+							(userId != amfAuditLog.getUserId())) {
 						list = null;
 
 						break;
@@ -2830,19 +2802,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 				query.append(WHERE_AND);
 			}
 
-			boolean bindUserId = false;
-
-			if (userId == null) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1);
-			}
-			else if (userId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3);
-			}
-			else {
-				bindUserId = true;
-
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
-			}
+			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
 
 			query.setStringAt(removeConjunction(query.stringAt(query.index() -
 						1)), query.index() - 1);
@@ -2873,9 +2833,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 					}
 				}
 
-				if (bindUserId) {
-					qPos.add(userId);
-				}
+				qPos.add(userId);
 
 				if (!pagination) {
 					list = (List<AmfAuditLog>)QueryUtil.list(q, getDialect(),
@@ -2916,7 +2874,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByEventTypeAndUserId(String eventType, String userId) {
+	public void removeByEventTypeAndUserId(String eventType, long userId) {
 		for (AmfAuditLog amfAuditLog : findByEventTypeAndUserId(eventType,
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(amfAuditLog);
@@ -2931,7 +2889,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 * @return the number of matching amf audit logs
 	 */
 	@Override
-	public int countByEventTypeAndUserId(String eventType, String userId) {
+	public int countByEventTypeAndUserId(String eventType, long userId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_EVENTTYPEANDUSERID;
 
 		Object[] finderArgs = new Object[] { eventType, userId };
@@ -2957,19 +2915,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_2);
 			}
 
-			boolean bindUserId = false;
-
-			if (userId == null) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1);
-			}
-			else if (userId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3);
-			}
-			else {
-				bindUserId = true;
-
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
-			}
+			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
 
 			String sql = query.toString();
 
@@ -2986,9 +2932,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 					qPos.add(eventType);
 				}
 
-				if (bindUserId) {
-					qPos.add(userId);
-				}
+				qPos.add(userId);
 
 				count = (Long)q.uniqueResult();
 
@@ -3015,7 +2959,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 * @return the number of matching amf audit logs
 	 */
 	@Override
-	public int countByEventTypeAndUserId(String[] eventTypes, String userId) {
+	public int countByEventTypeAndUserId(String[] eventTypes, long userId) {
 		if (eventTypes == null) {
 			eventTypes = new String[0];
 		}
@@ -3062,19 +3006,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 				query.append(WHERE_AND);
 			}
 
-			boolean bindUserId = false;
-
-			if (userId == null) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1);
-			}
-			else if (userId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3);
-			}
-			else {
-				bindUserId = true;
-
-				query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
-			}
+			query.append(_FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2);
 
 			query.setStringAt(removeConjunction(query.stringAt(query.index() -
 						1)), query.index() - 1);
@@ -3096,9 +3028,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 					}
 				}
 
-				if (bindUserId) {
-					qPos.add(userId);
-				}
+				qPos.add(userId);
 
 				count = (Long)q.uniqueResult();
 
@@ -3128,9 +3058,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 		removeConjunction(_FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_2) + ")";
 	private static final String _FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_6 = "(" +
 		removeConjunction(_FINDER_COLUMN_EVENTTYPEANDUSERID_EVENTTYPE_3) + ")";
-	private static final String _FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_1 = "amfAuditLog.userId IS NULL";
 	private static final String _FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_2 = "amfAuditLog.userId = ?";
-	private static final String _FINDER_COLUMN_EVENTTYPEANDUSERID_USERID_3 = "(amfAuditLog.userId IS NULL OR amfAuditLog.userId = '')";
 
 	public AmfAuditLogPersistenceImpl() {
 		setModelClass(AmfAuditLog.class);
