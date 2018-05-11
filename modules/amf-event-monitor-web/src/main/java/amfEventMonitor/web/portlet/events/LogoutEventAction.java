@@ -1,6 +1,7 @@
 package amfEventMonitor.web.portlet.events;
 
 import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
+import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.events.LifecycleEvent;
@@ -33,6 +34,7 @@ public class LogoutEventAction implements LifecycleAction{
             Date dateTime = new Date();
 
             AmfAuditLogDTO amfAuditLogDTO = new AmfAuditLogDTO(userId, userName, ipAddress, eventType, dateTime);
+            AmfAuditLogLocalServiceUtil.addAuditLogEvent(amfAuditLogDTO);
         } catch (PortalException e) {
             e.printStackTrace();
         }

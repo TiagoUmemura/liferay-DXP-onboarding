@@ -4,6 +4,7 @@ import amfUser.web.portlet.constants.AMFUserPortletKeys;
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
 import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
+import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -25,11 +26,6 @@ import java.util.Locale;
                     },
         service = MVCActionCommand.class)
 public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
-
-    @Reference
-    private volatile amfRegistrationLocalService _amfLocalService;
-
-    public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
 
     @Override
     protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
@@ -61,9 +57,13 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
 
         AMFUser user = new AMFUser(firtName,lastName,emailAddress,username,gender,birthday,password1,password2,homePhone,mobilePhone,address1,address2,city,state,zip,securityQuestion,securityAnswer,acceptedTou, companyId, locale);
 
+
+
         try {
             SessionErrors.clear(actionRequest);
-            getAmfLocalService().addAMFUser(user);
+            //getAmfLocalService().addAMFUser(user);
+            amfRegistrationLocalServiceUtil.addAMFUser(user);
+
         } catch (RegistrationException e) {
             //Add error messages if there are invalid values on some field
             for (String error: e.getErrors()) {
@@ -76,4 +76,9 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
         }
 
     }
+
+//    @Reference
+//    private volatile amfRegistrationLocalService _amfLocalService;
+//
+//    public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
 }

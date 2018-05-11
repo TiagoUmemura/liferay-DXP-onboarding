@@ -222,7 +222,4 @@ public class amfRegistrationLocalServiceImpl
 		}
 	}
 
-
-	public static final String FIND_ALL_EVENTS = "allEventsLog";
-
 }

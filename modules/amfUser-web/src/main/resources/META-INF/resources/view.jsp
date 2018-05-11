@@ -37,7 +37,7 @@
 <liferay-ui:error key="InvalidPassword1" message="InvalidPassword1" />
 <liferay-ui:error key="InvalidPassword2" message="InvalidPassword2" />
 
-<aui:form action="<%= addUserURL %>" name="<portlet:namespace />fm">
+<aui:form method="post" action="${addUserURL}" name="registrationForm">
 	<aui:row>
 		<aui:col md="12" sm="12">
 		<h4>Basic Info</h4>

@@ -6,5 +6,5 @@ package amfUser.web.portlet.constants;
 public class AMFUserPortletKeys {
 
 	public static final String AMFUser = "AMFUser";
-
+	public static final String AMFRegistration = "AMFRegistration";
 }
