@@ -73,6 +73,16 @@ public interface AmfAuditLogLocalService extends BaseLocalService,
 
 	public void addAuditLogEvent(AmfAuditLogDTO amfAuditLogDTO);
 
+	public int countByLoginAndLogout();
+
+	public int countByLoginAndLogout(long userId);
+
+	public int countByRegistration();
+
+	public int countByRegistration(long userId);
+
+	public int countByUserId(long userId);
+
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.
 	*
@@ -169,6 +179,19 @@ public interface AmfAuditLogLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public AmfAuditLog fetchAmfAuditLog(long amfAuditLogId);
+
+	public List<AmfAuditLog> findByLoginAndLogout(int start, int end);
+
+	public List<AmfAuditLog> findByLoginAndLogout(long userId, int start,
+		int end);
+
+	public List<AmfAuditLog> findByRegistration(int start, int end);
+
+	public List<AmfAuditLog> findByRegistration(long userId, int start, int end);
+
+	public List<AmfAuditLog> findByUserId(long userId);
+
+	public List<AmfAuditLog> findByUserId(long userId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

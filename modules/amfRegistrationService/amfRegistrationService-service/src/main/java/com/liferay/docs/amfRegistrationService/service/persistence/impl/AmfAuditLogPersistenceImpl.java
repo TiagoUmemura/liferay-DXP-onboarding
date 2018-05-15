@@ -85,83 +85,82 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERNAME = new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, AmfAuditLogImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuserName",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuserId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID =
 		new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, AmfAuditLogImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuserName",
-			new String[] { String.class.getName() },
-			AmfAuditLogModelImpl.USERNAME_COLUMN_BITMASK |
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuserId",
+			new String[] { Long.class.getName() },
+			AmfAuditLogModelImpl.USERID_COLUMN_BITMASK |
 			AmfAuditLogModelImpl.DATETIME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_USERNAME = new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuserName",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuserId",
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the amf audit logs where userName = &#63;.
+	 * Returns all the amf audit logs where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @return the matching amf audit logs
 	 */
 	@Override
-	public List<AmfAuditLog> findByuserName(String userName) {
-		return findByuserName(userName, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<AmfAuditLog> findByuserId(long userId) {
+		return findByuserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the amf audit logs where userName = &#63;.
+	 * Returns a range of all the amf audit logs where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param start the lower bound of the range of amf audit logs
 	 * @param end the upper bound of the range of amf audit logs (not inclusive)
 	 * @return the range of matching amf audit logs
 	 */
 	@Override
-	public List<AmfAuditLog> findByuserName(String userName, int start, int end) {
-		return findByuserName(userName, start, end, null);
+	public List<AmfAuditLog> findByuserId(long userId, int start, int end) {
+		return findByuserId(userId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the amf audit logs where userName = &#63;.
+	 * Returns an ordered range of all the amf audit logs where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param start the lower bound of the range of amf audit logs
 	 * @param end the upper bound of the range of amf audit logs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching amf audit logs
 	 */
 	@Override
-	public List<AmfAuditLog> findByuserName(String userName, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator) {
-		return findByuserName(userName, start, end, orderByComparator, true);
+	public List<AmfAuditLog> findByuserId(long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator) {
+		return findByuserId(userId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the amf audit logs where userName = &#63;.
+	 * Returns an ordered range of all the amf audit logs where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param start the lower bound of the range of amf audit logs
 	 * @param end the upper bound of the range of amf audit logs (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -169,8 +168,8 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	 * @return the ordered range of matching amf audit logs
 	 */
 	@Override
-	public List<AmfAuditLog> findByuserName(String userName, int start,
-		int end, OrderByComparator<AmfAuditLog> orderByComparator,
+	public List<AmfAuditLog> findByuserId(long userId, int start, int end,
+		OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -179,12 +178,12 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME;
-			finderArgs = new Object[] { userName };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID;
+			finderArgs = new Object[] { userId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERNAME;
-			finderArgs = new Object[] { userName, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID;
+			finderArgs = new Object[] { userId, start, end, orderByComparator };
 		}
 
 		List<AmfAuditLog> list = null;
@@ -195,7 +194,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (AmfAuditLog amfAuditLog : list) {
-					if (!Objects.equals(userName, amfAuditLog.getUserName())) {
+					if ((userId != amfAuditLog.getUserId())) {
 						list = null;
 
 						break;
@@ -217,19 +216,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 			query.append(_SQL_SELECT_AMFAUDITLOG_WHERE);
 
-			boolean bindUserName = false;
-
-			if (userName == null) {
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_1);
-			}
-			else if (userName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
-			}
-			else {
-				bindUserName = true;
-
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
-			}
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -251,9 +238,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindUserName) {
-					qPos.add(userName);
-				}
+				qPos.add(userId);
 
 				if (!pagination) {
 					list = (List<AmfAuditLog>)QueryUtil.list(q, getDialect(),
@@ -286,19 +271,18 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Returns the first amf audit log in the ordered set where userName = &#63;.
+	 * Returns the first amf audit log in the ordered set where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching amf audit log
 	 * @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	 */
 	@Override
-	public AmfAuditLog findByuserName_First(String userName,
+	public AmfAuditLog findByuserId_First(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
-		AmfAuditLog amfAuditLog = fetchByuserName_First(userName,
-				orderByComparator);
+		AmfAuditLog amfAuditLog = fetchByuserId_First(userId, orderByComparator);
 
 		if (amfAuditLog != null) {
 			return amfAuditLog;
@@ -308,8 +292,8 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("userName=");
-		msg.append(userName);
+		msg.append("userId=");
+		msg.append(userId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -317,17 +301,16 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Returns the first amf audit log in the ordered set where userName = &#63;.
+	 * Returns the first amf audit log in the ordered set where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	 */
 	@Override
-	public AmfAuditLog fetchByuserName_First(String userName,
+	public AmfAuditLog fetchByuserId_First(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
-		List<AmfAuditLog> list = findByuserName(userName, 0, 1,
-				orderByComparator);
+		List<AmfAuditLog> list = findByuserId(userId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -337,19 +320,18 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Returns the last amf audit log in the ordered set where userName = &#63;.
+	 * Returns the last amf audit log in the ordered set where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching amf audit log
 	 * @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	 */
 	@Override
-	public AmfAuditLog findByuserName_Last(String userName,
+	public AmfAuditLog findByuserId_Last(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
-		AmfAuditLog amfAuditLog = fetchByuserName_Last(userName,
-				orderByComparator);
+		AmfAuditLog amfAuditLog = fetchByuserId_Last(userId, orderByComparator);
 
 		if (amfAuditLog != null) {
 			return amfAuditLog;
@@ -359,8 +341,8 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("userName=");
-		msg.append(userName);
+		msg.append("userId=");
+		msg.append(userId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -368,22 +350,22 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Returns the last amf audit log in the ordered set where userName = &#63;.
+	 * Returns the last amf audit log in the ordered set where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	 */
 	@Override
-	public AmfAuditLog fetchByuserName_Last(String userName,
+	public AmfAuditLog fetchByuserId_Last(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
-		int count = countByuserName(userName);
+		int count = countByuserId(userId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<AmfAuditLog> list = findByuserName(userName, count - 1, count,
+		List<AmfAuditLog> list = findByuserId(userId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -394,17 +376,17 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Returns the amf audit logs before and after the current amf audit log in the ordered set where userName = &#63;.
+	 * Returns the amf audit logs before and after the current amf audit log in the ordered set where userId = &#63;.
 	 *
 	 * @param amfAuditLogId the primary key of the current amf audit log
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next amf audit log
 	 * @throws NoSuchAmfAuditLogException if a amf audit log with the primary key could not be found
 	 */
 	@Override
-	public AmfAuditLog[] findByuserName_PrevAndNext(long amfAuditLogId,
-		String userName, OrderByComparator<AmfAuditLog> orderByComparator)
+	public AmfAuditLog[] findByuserId_PrevAndNext(long amfAuditLogId,
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator)
 		throws NoSuchAmfAuditLogException {
 		AmfAuditLog amfAuditLog = findByPrimaryKey(amfAuditLogId);
 
@@ -415,13 +397,13 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 			AmfAuditLog[] array = new AmfAuditLogImpl[3];
 
-			array[0] = getByuserName_PrevAndNext(session, amfAuditLog,
-					userName, orderByComparator, true);
+			array[0] = getByuserId_PrevAndNext(session, amfAuditLog, userId,
+					orderByComparator, true);
 
 			array[1] = amfAuditLog;
 
-			array[2] = getByuserName_PrevAndNext(session, amfAuditLog,
-					userName, orderByComparator, false);
+			array[2] = getByuserId_PrevAndNext(session, amfAuditLog, userId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -433,8 +415,8 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 		}
 	}
 
-	protected AmfAuditLog getByuserName_PrevAndNext(Session session,
-		AmfAuditLog amfAuditLog, String userName,
+	protected AmfAuditLog getByuserId_PrevAndNext(Session session,
+		AmfAuditLog amfAuditLog, long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -449,19 +431,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 		query.append(_SQL_SELECT_AMFAUDITLOG_WHERE);
 
-		boolean bindUserName = false;
-
-		if (userName == null) {
-			query.append(_FINDER_COLUMN_USERNAME_USERNAME_1);
-		}
-		else if (userName.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
-		}
-		else {
-			bindUserName = true;
-
-			query.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
-		}
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -531,9 +501,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindUserName) {
-			qPos.add(userName);
-		}
+		qPos.add(userId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(amfAuditLog);
@@ -554,29 +522,29 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 	}
 
 	/**
-	 * Removes all the amf audit logs where userName = &#63; from the database.
+	 * Removes all the amf audit logs where userId = &#63; from the database.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 */
 	@Override
-	public void removeByuserName(String userName) {
-		for (AmfAuditLog amfAuditLog : findByuserName(userName,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByuserId(long userId) {
+		for (AmfAuditLog amfAuditLog : findByuserId(userId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
 			remove(amfAuditLog);
 		}
 	}
 
 	/**
-	 * Returns the number of amf audit logs where userName = &#63;.
+	 * Returns the number of amf audit logs where userId = &#63;.
 	 *
-	 * @param userName the user name
+	 * @param userId the user ID
 	 * @return the number of matching amf audit logs
 	 */
 	@Override
-	public int countByuserName(String userName) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERNAME;
+	public int countByuserId(long userId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
-		Object[] finderArgs = new Object[] { userName };
+		Object[] finderArgs = new Object[] { userId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -585,19 +553,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 			query.append(_SQL_COUNT_AMFAUDITLOG_WHERE);
 
-			boolean bindUserName = false;
-
-			if (userName == null) {
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_1);
-			}
-			else if (userName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_3);
-			}
-			else {
-				bindUserName = true;
-
-				query.append(_FINDER_COLUMN_USERNAME_USERNAME_2);
-			}
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 			String sql = query.toString();
 
@@ -610,9 +566,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindUserName) {
-					qPos.add(userName);
-				}
+				qPos.add(userId);
 
 				count = (Long)q.uniqueResult();
 
@@ -631,9 +585,7 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_USERNAME_USERNAME_1 = "amfAuditLog.userName IS NULL";
-	private static final String _FINDER_COLUMN_USERNAME_USERNAME_2 = "amfAuditLog.userName = ?";
-	private static final String _FINDER_COLUMN_USERNAME_USERNAME_3 = "(amfAuditLog.userName IS NULL OR amfAuditLog.userName = '')";
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "amfAuditLog.userId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_EVENTTYPE =
 		new FinderPath(AmfAuditLogModelImpl.ENTITY_CACHE_ENABLED,
 			AmfAuditLogModelImpl.FINDER_CACHE_ENABLED, AmfAuditLogImpl.class,
@@ -3276,10 +3228,10 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 		}
 		else
 		 if (isNew) {
-			Object[] args = new Object[] { amfAuditLogModelImpl.getUserName() };
+			Object[] args = new Object[] { amfAuditLogModelImpl.getUserId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERNAME, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
 				args);
 
 			args = new Object[] { amfAuditLogModelImpl.getEventType() };
@@ -3315,19 +3267,19 @@ public class AmfAuditLogPersistenceImpl extends BasePersistenceImpl<AmfAuditLog>
 
 		else {
 			if ((amfAuditLogModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						amfAuditLogModelImpl.getOriginalUserName()
+						amfAuditLogModelImpl.getOriginalUserId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERNAME, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
 					args);
 
-				args = new Object[] { amfAuditLogModelImpl.getUserName() };
+				args = new Object[] { amfAuditLogModelImpl.getUserId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERNAME, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERNAME,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
 					args);
 			}
 

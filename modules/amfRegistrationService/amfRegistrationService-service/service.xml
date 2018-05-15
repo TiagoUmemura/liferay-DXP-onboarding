@@ -22,8 +22,8 @@
 			<order-column name="dateTime"/>
 		</order>
 
-		<finder name="userName" return-type="Collection">
-			<finder-column name="userName"/>
+		<finder name="userId" return-type="Collection">
+			<finder-column name="userId"/>
 		</finder>
 
 		<finder name="eventType" return-type="Collection">

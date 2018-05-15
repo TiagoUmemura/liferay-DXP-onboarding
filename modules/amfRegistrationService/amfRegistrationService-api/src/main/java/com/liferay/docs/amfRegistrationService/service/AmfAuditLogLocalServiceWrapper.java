@@ -51,6 +51,31 @@ public class AmfAuditLogLocalServiceWrapper implements AmfAuditLogLocalService,
 		_amfAuditLogLocalService.addAuditLogEvent(amfAuditLogDTO);
 	}
 
+	@Override
+	public int countByLoginAndLogout() {
+		return _amfAuditLogLocalService.countByLoginAndLogout();
+	}
+
+	@Override
+	public int countByLoginAndLogout(long userId) {
+		return _amfAuditLogLocalService.countByLoginAndLogout(userId);
+	}
+
+	@Override
+	public int countByRegistration() {
+		return _amfAuditLogLocalService.countByRegistration();
+	}
+
+	@Override
+	public int countByRegistration(long userId) {
+		return _amfAuditLogLocalService.countByRegistration(userId);
+	}
+
+	@Override
+	public int countByUserId(long userId) {
+		return _amfAuditLogLocalService.countByUserId(userId);
+	}
+
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.
 	*
@@ -188,6 +213,42 @@ public class AmfAuditLogLocalServiceWrapper implements AmfAuditLogLocalService,
 	public com.liferay.docs.amfRegistrationService.model.AmfAuditLog fetchAmfAuditLog(
 		long amfAuditLogId) {
 		return _amfAuditLogLocalService.fetchAmfAuditLog(amfAuditLogId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByLoginAndLogout(
+		int start, int end) {
+		return _amfAuditLogLocalService.findByLoginAndLogout(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByLoginAndLogout(
+		long userId, int start, int end) {
+		return _amfAuditLogLocalService.findByLoginAndLogout(userId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByRegistration(
+		int start, int end) {
+		return _amfAuditLogLocalService.findByRegistration(start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByRegistration(
+		long userId, int start, int end) {
+		return _amfAuditLogLocalService.findByRegistration(userId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByUserId(
+		long userId) {
+		return _amfAuditLogLocalService.findByUserId(userId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByUserId(
+		long userId, int start, int end) {
+		return _amfAuditLogLocalService.findByUserId(userId, start, end);
 	}
 
 	@Override

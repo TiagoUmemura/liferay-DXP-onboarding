@@ -58,6 +58,26 @@ public class AmfAuditLogLocalServiceUtil {
 		getService().addAuditLogEvent(amfAuditLogDTO);
 	}
 
+	public static int countByLoginAndLogout() {
+		return getService().countByLoginAndLogout();
+	}
+
+	public static int countByLoginAndLogout(long userId) {
+		return getService().countByLoginAndLogout(userId);
+	}
+
+	public static int countByRegistration() {
+		return getService().countByRegistration();
+	}
+
+	public static int countByRegistration(long userId) {
+		return getService().countByRegistration(userId);
+	}
+
+	public static int countByUserId(long userId) {
+		return getService().countByUserId(userId);
+	}
+
 	/**
 	* Creates a new amf audit log with the primary key. Does not add the amf audit log to the database.
 	*
@@ -183,6 +203,36 @@ public class AmfAuditLogLocalServiceUtil {
 	public static com.liferay.docs.amfRegistrationService.model.AmfAuditLog fetchAmfAuditLog(
 		long amfAuditLogId) {
 		return getService().fetchAmfAuditLog(amfAuditLogId);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByLoginAndLogout(
+		int start, int end) {
+		return getService().findByLoginAndLogout(start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByLoginAndLogout(
+		long userId, int start, int end) {
+		return getService().findByLoginAndLogout(userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByRegistration(
+		int start, int end) {
+		return getService().findByRegistration(start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByRegistration(
+		long userId, int start, int end) {
+		return getService().findByRegistration(userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByUserId(
+		long userId) {
+		return getService().findByUserId(userId);
+	}
+
+	public static java.util.List<com.liferay.docs.amfRegistrationService.model.AmfAuditLog> findByUserId(
+		long userId, int start, int end) {
+		return getService().findByUserId(userId, start, end);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

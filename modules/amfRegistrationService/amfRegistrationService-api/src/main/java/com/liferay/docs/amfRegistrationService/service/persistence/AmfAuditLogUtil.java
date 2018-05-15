@@ -112,161 +112,158 @@ public class AmfAuditLogUtil {
 	}
 
 	/**
-	* Returns all the amf audit logs where userName = &#63;.
+	* Returns all the amf audit logs where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @return the matching amf audit logs
 	*/
-	public static List<AmfAuditLog> findByuserName(java.lang.String userName) {
-		return getPersistence().findByuserName(userName);
+	public static List<AmfAuditLog> findByuserId(long userId) {
+		return getPersistence().findByuserId(userId);
 	}
 
 	/**
-	* Returns a range of all the amf audit logs where userName = &#63;.
+	* Returns a range of all the amf audit logs where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param start the lower bound of the range of amf audit logs
 	* @param end the upper bound of the range of amf audit logs (not inclusive)
 	* @return the range of matching amf audit logs
 	*/
-	public static List<AmfAuditLog> findByuserName(java.lang.String userName,
-		int start, int end) {
-		return getPersistence().findByuserName(userName, start, end);
+	public static List<AmfAuditLog> findByuserId(long userId, int start, int end) {
+		return getPersistence().findByuserId(userId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the amf audit logs where userName = &#63;.
+	* Returns an ordered range of all the amf audit logs where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param start the lower bound of the range of amf audit logs
 	* @param end the upper bound of the range of amf audit logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching amf audit logs
 	*/
-	public static List<AmfAuditLog> findByuserName(java.lang.String userName,
-		int start, int end, OrderByComparator<AmfAuditLog> orderByComparator) {
+	public static List<AmfAuditLog> findByuserId(long userId, int start,
+		int end, OrderByComparator<AmfAuditLog> orderByComparator) {
 		return getPersistence()
-				   .findByuserName(userName, start, end, orderByComparator);
+				   .findByuserId(userId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the amf audit logs where userName = &#63;.
+	* Returns an ordered range of all the amf audit logs where userId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AmfAuditLogModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param start the lower bound of the range of amf audit logs
 	* @param end the upper bound of the range of amf audit logs (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching amf audit logs
 	*/
-	public static List<AmfAuditLog> findByuserName(java.lang.String userName,
-		int start, int end, OrderByComparator<AmfAuditLog> orderByComparator,
+	public static List<AmfAuditLog> findByuserId(long userId, int start,
+		int end, OrderByComparator<AmfAuditLog> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByuserName(userName, start, end, orderByComparator,
+				   .findByuserId(userId, start, end, orderByComparator,
 			retrieveFromCache);
 	}
 
 	/**
-	* Returns the first amf audit log in the ordered set where userName = &#63;.
+	* Returns the first amf audit log in the ordered set where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching amf audit log
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
-	public static AmfAuditLog findByuserName_First(java.lang.String userName,
+	public static AmfAuditLog findByuserId_First(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
-		return getPersistence().findByuserName_First(userName, orderByComparator);
+		return getPersistence().findByuserId_First(userId, orderByComparator);
 	}
 
 	/**
-	* Returns the first amf audit log in the ordered set where userName = &#63;.
+	* Returns the first amf audit log in the ordered set where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
-	public static AmfAuditLog fetchByuserName_First(java.lang.String userName,
+	public static AmfAuditLog fetchByuserId_First(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
-		return getPersistence()
-				   .fetchByuserName_First(userName, orderByComparator);
+		return getPersistence().fetchByuserId_First(userId, orderByComparator);
 	}
 
 	/**
-	* Returns the last amf audit log in the ordered set where userName = &#63;.
+	* Returns the last amf audit log in the ordered set where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching amf audit log
 	* @throws NoSuchAmfAuditLogException if a matching amf audit log could not be found
 	*/
-	public static AmfAuditLog findByuserName_Last(java.lang.String userName,
+	public static AmfAuditLog findByuserId_Last(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
-		return getPersistence().findByuserName_Last(userName, orderByComparator);
+		return getPersistence().findByuserId_Last(userId, orderByComparator);
 	}
 
 	/**
-	* Returns the last amf audit log in the ordered set where userName = &#63;.
+	* Returns the last amf audit log in the ordered set where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching amf audit log, or <code>null</code> if a matching amf audit log could not be found
 	*/
-	public static AmfAuditLog fetchByuserName_Last(java.lang.String userName,
+	public static AmfAuditLog fetchByuserId_Last(long userId,
 		OrderByComparator<AmfAuditLog> orderByComparator) {
-		return getPersistence().fetchByuserName_Last(userName, orderByComparator);
+		return getPersistence().fetchByuserId_Last(userId, orderByComparator);
 	}
 
 	/**
-	* Returns the amf audit logs before and after the current amf audit log in the ordered set where userName = &#63;.
+	* Returns the amf audit logs before and after the current amf audit log in the ordered set where userId = &#63;.
 	*
 	* @param amfAuditLogId the primary key of the current amf audit log
-	* @param userName the user name
+	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next amf audit log
 	* @throws NoSuchAmfAuditLogException if a amf audit log with the primary key could not be found
 	*/
-	public static AmfAuditLog[] findByuserName_PrevAndNext(long amfAuditLogId,
-		java.lang.String userName,
-		OrderByComparator<AmfAuditLog> orderByComparator)
+	public static AmfAuditLog[] findByuserId_PrevAndNext(long amfAuditLogId,
+		long userId, OrderByComparator<AmfAuditLog> orderByComparator)
 		throws com.liferay.docs.amfRegistrationService.exception.NoSuchAmfAuditLogException {
 		return getPersistence()
-				   .findByuserName_PrevAndNext(amfAuditLogId, userName,
+				   .findByuserId_PrevAndNext(amfAuditLogId, userId,
 			orderByComparator);
 	}
 
 	/**
-	* Removes all the amf audit logs where userName = &#63; from the database.
+	* Removes all the amf audit logs where userId = &#63; from the database.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	*/
-	public static void removeByuserName(java.lang.String userName) {
-		getPersistence().removeByuserName(userName);
+	public static void removeByuserId(long userId) {
+		getPersistence().removeByuserId(userId);
 	}
 
 	/**
-	* Returns the number of amf audit logs where userName = &#63;.
+	* Returns the number of amf audit logs where userId = &#63;.
 	*
-	* @param userName the user name
+	* @param userId the user ID
 	* @return the number of matching amf audit logs
 	*/
-	public static int countByuserName(java.lang.String userName) {
-		return getPersistence().countByuserName(userName);
+	public static int countByuserId(long userId) {
+		return getPersistence().countByuserId(userId);
 	}
 
 	/**
