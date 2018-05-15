@@ -9,6 +9,10 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.theme.PortletDisplay;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -34,6 +38,18 @@ import java.io.IOException;
 public class AmfEventMonitorPortlet extends MVCPortlet {
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+
+		//Verify if user has permission
+		ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+		PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+		boolean viewAllEventsPermission = permissionChecker.hasPermission(
+													themeDisplay.getScopeGroupId(),
+													portletDisplay.getRootPortletId(),
+													portletDisplay.getResourcePK(),
+													"VIEW_ALL_EVENTS");
+
+		renderRequest.setAttribute("viewAllEventsPermission", viewAllEventsPermission);
 		super.render(renderRequest, renderResponse);
 	}
 }
