@@ -33,7 +33,7 @@ import java.io.IOException;
 )
 public class AmfEventMonitorPortlet extends MVCPortlet {
 	@Override
-	public void render(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		super.render(renderRequest, renderResponse);
 	}
 }
