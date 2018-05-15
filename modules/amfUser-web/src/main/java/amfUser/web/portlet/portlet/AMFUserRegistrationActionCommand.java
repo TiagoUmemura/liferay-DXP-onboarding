@@ -2,15 +2,19 @@ package amfUser.web.portlet.portlet;
 
 import amfUser.web.portlet.constants.AMFUserPortletKeys;
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
+import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
 import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
+import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -18,6 +22,7 @@ import org.osgi.service.component.annotations.Reference;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.Locale;
 
 @Component(immediate = true,
@@ -57,12 +62,22 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
 
         AMFUser user = new AMFUser(firtName,lastName,emailAddress,username,gender,birthday,password1,password2,homePhone,mobilePhone,address1,address2,city,state,zip,securityQuestion,securityAnswer,acceptedTou, companyId, locale);
 
-
-
         try {
             SessionErrors.clear(actionRequest);
+
             //getAmfLocalService().addAMFUser(user);
             amfRegistrationLocalServiceUtil.addAMFUser(user);
+
+            //persist registration event
+            User portalUser = PortalUtil.getUser(actionRequest);
+            long userId = portalUser.getUserId();
+            String userName = username;
+            String ipAddress = "0.0.0.0";
+            String eventType = REGISTRATION_EVENT;
+            Date dateTime = new Date();
+
+            AmfAuditLogDTO amfAuditLogDTO = new AmfAuditLogDTO(userId, userName, ipAddress, eventType, dateTime);
+            AmfAuditLogLocalServiceUtil.addAuditLogEvent(amfAuditLogDTO);
 
         } catch (RegistrationException e) {
             //Add error messages if there are invalid values on some field
@@ -76,6 +91,8 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
         }
 
     }
+
+    public static final String REGISTRATION_EVENT = "REGISTRATION";
 
 //    @Reference
 //    private volatile amfRegistrationLocalService _amfLocalService;
