@@ -3,6 +3,7 @@
 
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="com.liferay.docs.amfRegistrationService.model.AmfAuditLog" />
+	<import class="com.liferay.docs.amfRegistrationService.model.AmfSearch" />
 	<class name="com.liferay.docs.amfRegistrationService.model.impl.AmfAuditLogImpl" table="AmfAuditLog">
 		<id name="amfAuditLogId" type="long">
 			<generator class="increment" />
@@ -12,5 +13,10 @@
 		<property name="dateTime" type="org.hibernate.type.TimestampType" />
 		<property name="eventType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ipAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.docs.amfRegistrationService.model.impl.AmfSearchImpl" table="AmfSearch">
+		<id name="amfSearchField" type="long">
+			<generator class="increment" />
+		</id>
 	</class>
 </hibernate-mapping>

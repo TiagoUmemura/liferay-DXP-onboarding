@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogPersistence;
+import com.liferay.docs.amfRegistrationService.service.persistence.AmfSearchPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -114,6 +115,44 @@ public abstract class amfRegistrationLocalServiceBaseImpl
 	public void setamfRegistrationLocalService(
 		amfRegistrationLocalService amfRegistrationLocalService) {
 		this.amfRegistrationLocalService = amfRegistrationLocalService;
+	}
+
+	/**
+	 * Returns the amf search local service.
+	 *
+	 * @return the amf search local service
+	 */
+	public com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService getAmfSearchLocalService() {
+		return amfSearchLocalService;
+	}
+
+	/**
+	 * Sets the amf search local service.
+	 *
+	 * @param amfSearchLocalService the amf search local service
+	 */
+	public void setAmfSearchLocalService(
+		com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService amfSearchLocalService) {
+		this.amfSearchLocalService = amfSearchLocalService;
+	}
+
+	/**
+	 * Returns the amf search persistence.
+	 *
+	 * @return the amf search persistence
+	 */
+	public AmfSearchPersistence getAmfSearchPersistence() {
+		return amfSearchPersistence;
+	}
+
+	/**
+	 * Sets the amf search persistence.
+	 *
+	 * @param amfSearchPersistence the amf search persistence
+	 */
+	public void setAmfSearchPersistence(
+		AmfSearchPersistence amfSearchPersistence) {
+		this.amfSearchPersistence = amfSearchPersistence;
 	}
 
 	/**
@@ -349,6 +388,10 @@ public abstract class amfRegistrationLocalServiceBaseImpl
 	protected AmfAuditLogPersistence amfAuditLogPersistence;
 	@BeanReference(type = amfRegistrationLocalService.class)
 	protected amfRegistrationLocalService amfRegistrationLocalService;
+	@BeanReference(type = com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService.class)
+	protected com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService amfSearchLocalService;
+	@BeanReference(type = AmfSearchPersistence.class)
+	protected AmfSearchPersistence amfSearchPersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.AddressLocalService.class)

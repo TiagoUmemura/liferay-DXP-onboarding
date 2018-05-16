@@ -6,3 +6,7 @@ create table AmfAuditLog (
 	eventType VARCHAR(75) null,
 	ipAddress VARCHAR(75) null
 );
+
+create table AmfSearch (
+	amfSearchField LONG not null primary key
+);

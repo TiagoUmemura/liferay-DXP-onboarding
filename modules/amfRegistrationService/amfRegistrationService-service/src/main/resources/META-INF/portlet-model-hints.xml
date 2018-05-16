@@ -9,4 +9,7 @@
 		<field name="eventType" type="String" />
 		<field name="ipAddress" type="String" />
 	</model>
+	<model name="com.liferay.docs.amfRegistrationService.model.AmfSearch">
+		<field name="amfSearchField" type="long" />
+	</model>
 </model-hints>

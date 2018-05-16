@@ -41,4 +41,12 @@
 		</finder>
 	</entity>
 
+	<entity name="AmfSearch" table="AmfSearch" local-service="true" remote-service="false" uuid="false">
+		<column db-name="amfSearchField" name="amfSearchField" primary="true" type="long" id-type="increment"/>
+
+		<finder name="amfSearchFieldFinder" return-type="Collection">
+			<finder-column name="amfSearchField"/>
+		</finder>
+	</entity>
+
 </service-builder>

@@ -1,8 +1,20 @@
 <custom-sql>
-    <sql id="[allEventsLog]">
+    <sql id="[userByZipCode]">
         <![CDATA[
-            select auditEventId, userName, createDate, eventType, clientHost
-            from Audit_AuditEvent
+            select User_.userId, firstName, lastName, userName, emailAddress, zip
+            from User_
+            inner join Address on User_.userId = Address.userId
+            where Address.zip = ?
+            limit ?,?
+        ]]>
+    </sql>
+
+    <sql id="[countByZipCode]">
+        <![CDATA[
+            select count(User_.userId)
+            from User_
+            inner join Address on User_.userId = Address.userId
+            where Address.zip = ?
         ]]>
     </sql>
 </custom-sql>
