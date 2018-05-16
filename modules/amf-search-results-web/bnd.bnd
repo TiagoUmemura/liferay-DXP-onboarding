@@ -1,0 +1,4 @@
+Bundle-Name: amf-search-results-web
+Bundle-SymbolicName: amf-search-results.web.portlet
+Bundle-Version: 1.0.0
+Export-Package: amf-search-results.web.portlet.constants
