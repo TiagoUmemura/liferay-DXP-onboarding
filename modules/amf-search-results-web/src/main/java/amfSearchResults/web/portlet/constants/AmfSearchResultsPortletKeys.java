@@ -1,4 +1,4 @@
-package amf-search-results.web.portlet.constants;
+package amfSearchResults.web.portlet.constants;
 
 /**
  * @author tiago
