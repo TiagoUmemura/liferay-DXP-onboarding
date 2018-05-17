@@ -18,7 +18,11 @@ import com.liferay.docs.amfRegistrationService.dto.AmfUserSearchDTO;
 import com.liferay.docs.amfRegistrationService.service.base.AmfSearchLocalServiceBaseImpl;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfSearchPersistence;
 import com.liferay.docs.amfRegistrationService.service.persistence.impl.AmfSearchPersistenceImpl;
-import com.liferay.portal.kernel.dao.orm.*;
+import com.liferay.portal.kernel.dao.orm.PortalCustomSQLUtil;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.dao.orm.custom.sql.CustomSQLUtil;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -48,7 +52,7 @@ public class AmfSearchLocalServiceImpl extends AmfSearchLocalServiceBaseImpl {
 		Session session = null;
 		try {
 			session = amfSearchPersistence.openSession();
-			String sql = PortalCustomSQLUtil.get("userByZipCode");
+			String sql = CustomSQLUtil.get(amfSearchPersistence.getClass(),"userByZipCode");
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 
@@ -90,7 +94,7 @@ public class AmfSearchLocalServiceImpl extends AmfSearchLocalServiceBaseImpl {
 		Session session = null;
 		try {
 			session = amfSearchPersistence.openSession();
-			String sql = PortalCustomSQLUtil.get("userByZipCode");
+			String sql = CustomSQLUtil.get(amfSearchPersistence.getClass(),"countByZipCode");
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 
@@ -109,7 +113,7 @@ public class AmfSearchLocalServiceImpl extends AmfSearchLocalServiceBaseImpl {
 
 	@Override
 	public void findByZip() {
-		
+
 	}
 
 }

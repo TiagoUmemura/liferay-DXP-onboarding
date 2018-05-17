@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <custom-sql>
-    <sql id="[userByZipCode]">
+    <sql id="userByZipCode">
         <![CDATA[
             select User_.userId, firstName, lastName, userName, emailAddress, zip
             from User_
@@ -9,7 +10,7 @@
         ]]>
     </sql>
 
-    <sql id="[countByZipCode]">
+    <sql id="countByZipCode">
         <![CDATA[
             select count(User_.userId)
             from User_
