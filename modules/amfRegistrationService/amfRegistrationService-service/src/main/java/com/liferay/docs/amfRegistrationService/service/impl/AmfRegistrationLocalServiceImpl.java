@@ -15,6 +15,7 @@
 package com.liferay.docs.amfRegistrationService.service.impl;
 
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
+import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
 import com.liferay.docs.amfRegistrationService.exception.RegistrationException;
 import com.liferay.docs.amfRegistrationService.service.base.AmfRegistrationLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -54,6 +55,8 @@ public class AmfRegistrationLocalServiceImpl
 	 */
 
 	private ArrayList<String> listErrors = new ArrayList<String>();
+	public static final String REGISTRATION_EVENT = "REGISTRATION";
+	public static final String IP_ADDRESS = "0.0.0.0";
 
 	public void addAMFUser(AMFUser user) throws PortalException, ParseException {
 		//if true throw a exception to AMFUserPortlet
@@ -80,6 +83,9 @@ public class AmfRegistrationLocalServiceImpl
 
 		Phone Mobilephone = phoneLocalService.addPhone(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getMobilePhone(), null, 11008, true, new ServiceContext());
 
+		//Persist Registration Event
+		AmfAuditLogDTO amfAuditLogDTO = new AmfAuditLogDTO(userAMF.getUserId(), user.getUsername(), IP_ADDRESS, REGISTRATION_EVENT, new Date());
+		amfAuditLogLocalService.addAuditLogEvent(amfAuditLogDTO);
 	}
 
 	private boolean validationAMFUser(AMFUser user) throws ParseException {

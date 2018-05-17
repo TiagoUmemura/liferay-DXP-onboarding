@@ -73,17 +73,6 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
             //Persist User
             getAmfRegistrationLocalService().addAMFUser(user);
 
-            //persist registration event
-            User portalUser = PortalUtil.getUser(actionRequest);
-            long userId = portalUser.getUserId();
-            String userName = username;
-            String ipAddress = "0.0.0.0";
-            String eventType = REGISTRATION_EVENT;
-            Date dateTime = new Date();
-
-            AmfAuditLogDTO amfAuditLogDTO = new AmfAuditLogDTO(userId, userName, ipAddress, eventType, dateTime);
-            AmfAuditLogLocalServiceUtil.addAuditLogEvent(amfAuditLogDTO);
-
         } catch (RegistrationException e) {
             //Add error messages if there are invalid values on some field
             for (String error: e.getErrors()) {
