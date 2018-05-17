@@ -27,25 +27,25 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import java.text.ParseException;
 
 /**
- * Provides the local service interface for amfRegistration. Methods of this
+ * Provides the local service interface for AmfRegistration. Methods of this
  * service will not have security checks based on the propagated JAAS
  * credentials because this service can only be accessed from within the same
  * VM.
  *
  * @author Brian Wing Shun Chan
- * @see amfRegistrationLocalServiceUtil
- * @see com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl
- * @see com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl
+ * @see AmfRegistrationLocalServiceUtil
+ * @see com.liferay.docs.amfRegistrationService.service.base.AmfRegistrationLocalServiceBaseImpl
+ * @see com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl
  * @generated
  */
 @ProviderType
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface amfRegistrationLocalService extends BaseLocalService {
+public interface AmfRegistrationLocalService extends BaseLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link amfRegistrationLocalServiceUtil} to access the amf registration local service. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link AmfRegistrationLocalServiceUtil} to access the amf registration local service. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public void addAMFUser(AMFUser user) throws PortalException, ParseException;
 

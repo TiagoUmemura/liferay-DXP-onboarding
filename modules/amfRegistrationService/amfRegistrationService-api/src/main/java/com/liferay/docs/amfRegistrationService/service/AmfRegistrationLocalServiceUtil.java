@@ -21,25 +21,25 @@ import com.liferay.osgi.util.ServiceTrackerFactory;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * Provides the local service utility for amfRegistration. This utility wraps
- * {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and is the
+ * Provides the local service utility for AmfRegistration. This utility wraps
+ * {@link com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
- * @see amfRegistrationLocalService
- * @see com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl
- * @see com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl
+ * @see AmfRegistrationLocalService
+ * @see com.liferay.docs.amfRegistrationService.service.base.AmfRegistrationLocalServiceBaseImpl
+ * @see com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl
  * @generated
  */
 @ProviderType
-public class amfRegistrationLocalServiceUtil {
+public class AmfRegistrationLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static void addAMFUser(
 		com.liferay.docs.amfRegistrationService.dto.AMFUser user)
@@ -57,10 +57,10 @@ public class amfRegistrationLocalServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static amfRegistrationLocalService getService() {
+	public static AmfRegistrationLocalService getService() {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<amfRegistrationLocalService, amfRegistrationLocalService> _serviceTracker =
-		ServiceTrackerFactory.open(amfRegistrationLocalService.class);
+	private static ServiceTracker<AmfRegistrationLocalService, AmfRegistrationLocalService> _serviceTracker =
+		ServiceTrackerFactory.open(AmfRegistrationLocalService.class);
 }

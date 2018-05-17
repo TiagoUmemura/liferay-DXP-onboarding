@@ -3,10 +3,9 @@ package amfUser.web.portlet.portlet;
 import amfUser.web.portlet.constants.AMFUserPortletKeys;
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
 import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
-import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
+import com.liferay.docs.amfRegistrationService.exception.RegistrationException;
 import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil;
-import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService;
-import com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil;
+import com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -31,6 +30,12 @@ import java.util.Locale;
                     },
         service = MVCActionCommand.class)
 public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
+
+    @Reference
+    private volatile AmfRegistrationLocalService _amfRegistrationLocalService;
+
+    private AmfRegistrationLocalService getAmfRegistrationLocalService() { return _amfRegistrationLocalService;}
+
 
     @Override
     protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
@@ -65,8 +70,8 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
         try {
             SessionErrors.clear(actionRequest);
 
-            //getAmfLocalService().addAMFUser(user);
-            amfRegistrationLocalServiceUtil.addAMFUser(user);
+            //Persist User
+            getAmfRegistrationLocalService().addAMFUser(user);
 
             //persist registration event
             User portalUser = PortalUtil.getUser(actionRequest);
@@ -94,8 +99,4 @@ public class AMFUserRegistrationActionCommand extends BaseMVCActionCommand{
 
     public static final String REGISTRATION_EVENT = "REGISTRATION";
 
-//    @Reference
-//    private volatile amfRegistrationLocalService _amfLocalService;
-//
-//    public amfRegistrationLocalService getAmfLocalService() { return _amfLocalService; }
 }

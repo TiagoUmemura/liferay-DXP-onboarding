@@ -3,7 +3,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean class="com.liferay.docs.amfRegistrationService.service.impl.AmfAuditLogLocalServiceImpl" id="com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService" />
 	<bean class="com.liferay.docs.amfRegistrationService.service.persistence.impl.AmfAuditLogPersistenceImpl" id="com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogPersistence" parent="basePersistence" />
-	<bean class="com.liferay.docs.amfRegistrationService.service.impl.amfRegistrationLocalServiceImpl" id="com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService" />
+	<bean class="com.liferay.docs.amfRegistrationService.service.impl.AmfRegistrationLocalServiceImpl" id="com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService" />
 	<bean class="com.liferay.docs.amfRegistrationService.service.impl.AmfSearchLocalServiceImpl" id="com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService" />
 	<bean class="com.liferay.docs.amfRegistrationService.service.persistence.impl.AmfSearchPersistenceImpl" id="com.liferay.docs.amfRegistrationService.service.persistence.AmfSearchPersistence" parent="basePersistence" />
 </beans>

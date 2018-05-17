@@ -358,7 +358,7 @@ public abstract class AmfAuditLogLocalServiceBaseImpl
 	 *
 	 * @return the amf registration local service
 	 */
-	public com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService getamfRegistrationLocalService() {
+	public com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService getAmfRegistrationLocalService() {
 		return amfRegistrationLocalService;
 	}
 
@@ -367,8 +367,8 @@ public abstract class AmfAuditLogLocalServiceBaseImpl
 	 *
 	 * @param amfRegistrationLocalService the amf registration local service
 	 */
-	public void setamfRegistrationLocalService(
-		com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService amfRegistrationLocalService) {
+	public void setAmfRegistrationLocalService(
+		com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService amfRegistrationLocalService) {
 		this.amfRegistrationLocalService = amfRegistrationLocalService;
 	}
 
@@ -579,8 +579,8 @@ public abstract class AmfAuditLogLocalServiceBaseImpl
 	protected AmfAuditLogLocalService amfAuditLogLocalService;
 	@BeanReference(type = AmfAuditLogPersistence.class)
 	protected AmfAuditLogPersistence amfAuditLogPersistence;
-	@BeanReference(type = com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService.class)
-	protected com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService amfRegistrationLocalService;
+	@BeanReference(type = com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService.class)
+	protected com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService amfRegistrationLocalService;
 	@BeanReference(type = com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService.class)
 	protected com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService amfSearchLocalService;
 	@BeanReference(type = AmfSearchPersistence.class)

@@ -14,11 +14,10 @@
 
 package com.liferay.docs.amfRegistrationService.service.impl;
 
-import com.liferay.docs.amfRegistrationService.exceptions.RegistrationException;
 import com.liferay.docs.amfRegistrationService.dto.AMFUser;
-import com.liferay.docs.amfRegistrationService.service.base.amfRegistrationLocalServiceBaseImpl;
+import com.liferay.docs.amfRegistrationService.exception.RegistrationException;
+import com.liferay.docs.amfRegistrationService.service.base.AmfRegistrationLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Address;
 import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.Phone;
@@ -31,29 +30,29 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * The implementation of the amf registration local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see amfRegistrationLocalServiceBaseImpl
- * @see com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil
+ * @see AmfRegistrationLocalServiceBaseImpl
+ * @see com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalServiceUtil
  */
-public class amfRegistrationLocalServiceImpl
-	extends amfRegistrationLocalServiceBaseImpl {
+public class AmfRegistrationLocalServiceImpl
+	extends AmfRegistrationLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.amfRegistrationLocalServiceUtil} to access the amf registration local service.
+	 * Never reference this class directly. Always use {@link com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalServiceUtil} to access the amf registration local service.
 	 */
+
 	private ArrayList<String> listErrors = new ArrayList<String>();
 
 	public void addAMFUser(AMFUser user) throws PortalException, ParseException {
@@ -69,9 +68,9 @@ public class amfRegistrationLocalServiceImpl
 
 
 		User userAMF = userLocalService.addUser(
-			0, user.getCompanyId(), false, user.getPassword1(), user.getPassword2(),false, user.getUsername(), user.getEmailAddress(), 0, null,
-			user.getLocale(), user.getFirstName(), "", user.getLastName(), 0, 0, "male".equals(user.getGender()), birthdayMonth, birthdayDay, birthdayYear,
-			"", null, null, null, null, false, new ServiceContext()
+				0, user.getCompanyId(), false, user.getPassword1(), user.getPassword2(),false, user.getUsername(), user.getEmailAddress(), 0, null,
+				user.getLocale(), user.getFirstName(), "", user.getLastName(), 0, 0, "male".equals(user.getGender()), birthdayMonth, birthdayDay, birthdayYear,
+				"", null, null, null, null, false, new ServiceContext()
 		);
 
 		Address address = addressLocalService.addAddress(userAMF.getUserId(), Contact.class.getName(), userAMF.getContactId(), user.getAddress1(), user.getAddress2(), "",
@@ -113,7 +112,7 @@ public class amfRegistrationLocalServiceImpl
 
 	private void validateFirstName(String name){
 		if(name.matches("^.*[^a-zA-Z0-9 ].*$") || name.length() > 50 || name == null || name.equals("")){
- 			listErrors.add("InvalidFirstName");
+			listErrors.add("InvalidFirstName");
 		}
 	}
 
@@ -221,5 +220,4 @@ public class amfRegistrationLocalServiceImpl
 			listErrors.add("InvalidState");
 		}
 	}
-
 }

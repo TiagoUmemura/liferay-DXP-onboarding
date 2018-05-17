@@ -1,4 +1,4 @@
-package com.liferay.docs.amfRegistrationService.exceptions;
+package com.liferay.docs.amfRegistrationService.exception;
 
 import com.liferay.portal.kernel.exception.PortalException;
 

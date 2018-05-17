@@ -48,7 +48,7 @@ public class AmfAuditLogLocalServiceImpl extends AmfAuditLogLocalServiceBaseImpl
 	 */
 
 	public void addAuditLogEvent(AmfAuditLogDTO amfAuditLogDTO){
-		AmfAuditLog amfAuditLog = amfAuditLogPersistence.create(0);
+		AmfAuditLog amfAuditLog = amfAuditLogPersistence.create(counterLocalService.increment(AmfAuditLog.class.getName()));
 
 		amfAuditLog.setUserId(amfAuditLogDTO.getUserId());
 		amfAuditLog.setUserName(amfAuditLogDTO.getUserName());
@@ -64,47 +64,47 @@ public class AmfAuditLogLocalServiceImpl extends AmfAuditLogLocalServiceBaseImpl
 	}
 
 	public List<AmfAuditLog> findByUserId(long userId, int start, int end){
-		return AmfAuditLogUtil.findByuserId(userId, start, end);
+		return amfAuditLogPersistence.findByuserId(userId, start, end);
 	}
 
 	public List<AmfAuditLog> findByRegistration(int start, int end) {
-		return AmfAuditLogUtil.findByeventType(REGISTRATION_EVENT, start, end);
+		return amfAuditLogPersistence.findByeventType(REGISTRATION_EVENT, start, end);
 	}
 
 	public List<AmfAuditLog> findByRegistration(long userId, int start, int end) {
-		return AmfAuditLogUtil.findByEventTypeAndUserId(REGISTRATION_EVENT, userId, start, end);
+		return amfAuditLogPersistence.findByEventTypeAndUserId(REGISTRATION_EVENT, userId, start, end);
 	}
 
 	public List<AmfAuditLog> findByLoginAndLogout(int start, int end){
 		String[] loginLogout = {LOGIN, LOGOUT};
-		return AmfAuditLogUtil.findByeventType(loginLogout, start, end);
+		return amfAuditLogPersistence.findByeventType(loginLogout, start, end);
 	}
 
 	public List<AmfAuditLog> findByLoginAndLogout(long userId, int start, int end){
 		String[] loginLogout = {LOGIN, LOGOUT};
-		return AmfAuditLogUtil.findByEventTypeAndUserId(loginLogout, userId, start, end);
+		return amfAuditLogPersistence.findByEventTypeAndUserId(loginLogout, userId, start, end);
 	}
 
 	public int countByUserId(long userId){
-		return AmfAuditLogUtil.countByuserId(userId);
+		return amfAuditLogPersistence.countByuserId(userId);
 	}
 
 	public int countByRegistration(){
-		return AmfAuditLogUtil.countByeventType(REGISTRATION_EVENT);
+		return amfAuditLogPersistence.countByeventType(REGISTRATION_EVENT);
 	}
 
 	public int countByRegistration(long userId){
-		return AmfAuditLogUtil.countByEventTypeAndUserId(REGISTRATION_EVENT, userId);
+		return amfAuditLogPersistence.countByEventTypeAndUserId(REGISTRATION_EVENT, userId);
 	}
 
 	public int countByLoginAndLogout(){
 		String[] loginLogout = {LOGIN, LOGOUT};
-		return AmfAuditLogUtil.countByeventType(loginLogout);
+		return amfAuditLogPersistence.countByeventType(loginLogout);
 	}
 
 	public int countByLoginAndLogout(long userId){
 		String[] loginLogout = {LOGIN, LOGOUT};
-		return AmfAuditLogUtil.countByEventTypeAndUserId(loginLogout, userId);
+		return amfAuditLogPersistence.countByEventTypeAndUserId(loginLogout, userId);
 	}
 
 	public boolean checkPermission(long groupId){

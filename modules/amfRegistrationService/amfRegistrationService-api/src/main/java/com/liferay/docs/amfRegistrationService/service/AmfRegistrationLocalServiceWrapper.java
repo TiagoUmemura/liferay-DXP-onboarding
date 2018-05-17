@@ -19,18 +19,18 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
- * Provides a wrapper for {@link amfRegistrationLocalService}.
+ * Provides a wrapper for {@link AmfRegistrationLocalService}.
  *
  * @author Brian Wing Shun Chan
- * @see amfRegistrationLocalService
+ * @see AmfRegistrationLocalService
  * @generated
  */
 @ProviderType
-public class amfRegistrationLocalServiceWrapper
-	implements amfRegistrationLocalService,
-		ServiceWrapper<amfRegistrationLocalService> {
-	public amfRegistrationLocalServiceWrapper(
-		amfRegistrationLocalService amfRegistrationLocalService) {
+public class AmfRegistrationLocalServiceWrapper
+	implements AmfRegistrationLocalService,
+		ServiceWrapper<AmfRegistrationLocalService> {
+	public AmfRegistrationLocalServiceWrapper(
+		AmfRegistrationLocalService amfRegistrationLocalService) {
 		_amfRegistrationLocalService = amfRegistrationLocalService;
 	}
 
@@ -53,15 +53,15 @@ public class amfRegistrationLocalServiceWrapper
 	}
 
 	@Override
-	public amfRegistrationLocalService getWrappedService() {
+	public AmfRegistrationLocalService getWrappedService() {
 		return _amfRegistrationLocalService;
 	}
 
 	@Override
 	public void setWrappedService(
-		amfRegistrationLocalService amfRegistrationLocalService) {
+		AmfRegistrationLocalService amfRegistrationLocalService) {
 		_amfRegistrationLocalService = amfRegistrationLocalService;
 	}
 
-	private amfRegistrationLocalService _amfRegistrationLocalService;
+	private AmfRegistrationLocalService _amfRegistrationLocalService;
 }
