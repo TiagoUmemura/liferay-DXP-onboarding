@@ -18,8 +18,13 @@ import com.liferay.docs.amfRegistrationService.dto.AmfAuditLogDTO;
 import com.liferay.docs.amfRegistrationService.model.AmfAuditLog;
 import com.liferay.docs.amfRegistrationService.service.base.AmfAuditLogLocalServiceBaseImpl;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogUtil;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.List;
+
+import static com.liferay.portal.kernel.security.permission.PermissionThreadLocal.getPermissionChecker;
 
 /**
  * The implementation of the amf audit log local service.
@@ -102,7 +107,17 @@ public class AmfAuditLogLocalServiceImpl extends AmfAuditLogLocalServiceBaseImpl
 		return AmfAuditLogUtil.countByEventTypeAndUserId(loginLogout, userId);
 	}
 
-	private static final String REGISTRATION_EVENT = "REGISTRATION";
+	public boolean checkPermission(long groupId){
+		PermissionChecker permissionChecker = getPermissionChecker();
+		boolean viewAllEventsPermission = permissionChecker.hasPermission(groupId, PORTLET_NAME, CLASS_PK, PERMISSION_NAME);
+		return viewAllEventsPermission;
+	}
+
+	private static final long CLASS_PK = 0;
 	private static final String LOGIN = "LOGIN";
 	private static final String LOGOUT = "LOGOUT";
+	private static final String PERMISSION_NAME = "VIEW_ALL_EVENTS";
+	private static final String PORTLET_NAME = "AmfEventMonitor";
+	private static final String REGISTRATION_EVENT = "REGISTRATION";
+
 }

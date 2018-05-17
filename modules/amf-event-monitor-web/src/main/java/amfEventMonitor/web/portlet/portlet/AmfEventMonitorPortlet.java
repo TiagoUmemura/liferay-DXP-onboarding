@@ -2,6 +2,8 @@ package amfEventMonitor.web.portlet.portlet;
 
 import amfEventMonitor.web.portlet.constants.AmfEventMonitorPortletKeys;
 
+import com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalService;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
@@ -36,20 +38,35 @@ import java.io.IOException;
 	service = Portlet.class
 )
 public class AmfEventMonitorPortlet extends MVCPortlet {
+	@Reference
+	private volatile AmfAuditLogLocalService _amfAuditLogService;
+
+	private AmfAuditLogLocalService getAmfAuditLogService() { return _amfAuditLogService;}
+
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 
-		//Verify if user has permission
 		ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-		PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
-		boolean viewAllEventsPermission = permissionChecker.hasPermission(
-													themeDisplay.getScopeGroupId(),
-													portletDisplay.getRootPortletId(),
-													portletDisplay.getResourcePK(),
-													"VIEW_ALL_EVENTS");
+		User currentUser = themeDisplay.getUser();
+		int count,countRegistration,countLoginAndLogout;
+
+		boolean viewAllEventsPermission = getAmfAuditLogService().checkPermission(themeDisplay.getScopeGroupId());
+
+		if(viewAllEventsPermission){
+			count = getAmfAuditLogService().getAmfAuditLogsCount();
+			countRegistration = getAmfAuditLogService().countByRegistration();
+			countLoginAndLogout = getAmfAuditLogService().countByLoginAndLogout();
+		}else{
+			count = getAmfAuditLogService().countByUserId(currentUser.getUserId());
+			countRegistration = getAmfAuditLogService().countByRegistration(currentUser.getUserId());
+			countLoginAndLogout = getAmfAuditLogService().countByLoginAndLogout(currentUser.getUserId());
+		}
 
 		renderRequest.setAttribute("viewAllEventsPermission", viewAllEventsPermission);
+		renderRequest.setAttribute("count", count);
+		renderRequest.setAttribute("countRegistration", countRegistration);
+		renderRequest.setAttribute("countLoginAndLogout", countLoginAndLogout);
+		renderRequest.setAttribute("currentUser", currentUser);
 		super.render(renderRequest, renderResponse);
 	}
 }

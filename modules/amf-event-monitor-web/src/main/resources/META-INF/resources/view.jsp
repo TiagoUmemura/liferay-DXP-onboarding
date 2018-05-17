@@ -1,9 +1,3 @@
-<%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil" %>
-<%@ page import="com.liferay.docs.amfRegistrationService.model.AmfAuditLog" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="com.liferay.portal.kernel.model.User" %>
 <%@ include file="/init.jsp" %>
 
 <p>
@@ -11,27 +5,14 @@
 </p>
 
 <%
-	boolean hasPermission = (boolean)request.getAttribute("viewAllEventsPermission");
-	User currentUser = themeDisplay.getUser();
-
-	int count,countRegistration,countLoginAndLogout;
-
-	if(hasPermission) {
-		count = AmfAuditLogLocalServiceUtil.getAmfAuditLogsCount();
-		countRegistration = AmfAuditLogLocalServiceUtil.countByRegistration();
-		countLoginAndLogout = AmfAuditLogLocalServiceUtil.countByLoginAndLogout();
-	}else{
-	    count = AmfAuditLogLocalServiceUtil.countByUserId(currentUser.getUserId());
-	    countRegistration = AmfAuditLogLocalServiceUtil.countByRegistration(currentUser.getUserId());
-	    countLoginAndLogout = AmfAuditLogLocalServiceUtil.countByLoginAndLogout(currentUser.getUserId());
-	}
+	User currentUser = (User) request.getAttribute("currentUser");
 %>
 
 <liferay-ui:tabs names="All,Registration,Login" refresh="false" tabsValues="All,Registration,Login">
 	<liferay-ui:section>
-		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="<%= count %>">
+		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="${count}">
 			<c:choose>
-				<c:when test="<%= hasPermission %>">
+				<c:when test="${viewAllEventsPermission}">
 					<liferay-ui:search-container-results
 						results="<%= AmfAuditLogLocalServiceUtil.getAmfAuditLogs(searchContainer.getStart(), searchContainer.getEnd()) %>"
 					/>
@@ -58,9 +39,9 @@
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="<%= countRegistration %>">
+		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="${countRegistration}">
 				<c:choose>
-					<c:when test="<%= hasPermission %>">
+					<c:when test="${viewAllEventsPermission}">
 						<liferay-ui:search-container-results
 							results="<%= AmfAuditLogLocalServiceUtil.findByRegistration(searchContainer.getStart(), searchContainer.getEnd()) %>"
 						/>
@@ -87,9 +68,9 @@
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="<%= countLoginAndLogout %>">
+		<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="${countLoginAndLogout}">
 				<c:choose>
-					<c:when test="<%= hasPermission %>">
+					<c:when test="${viewAllEventsPermission}">
 						<liferay-ui:search-container-results
 							results="<%= AmfAuditLogLocalServiceUtil.findByLoginAndLogout(searchContainer.getStart(), searchContainer.getEnd()) %>"
 						/>

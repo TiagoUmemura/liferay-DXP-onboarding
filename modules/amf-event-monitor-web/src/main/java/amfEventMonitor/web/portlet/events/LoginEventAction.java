@@ -41,7 +41,7 @@ public class LoginEventAction implements LifecycleAction {
             Date dateTime = new Date();
 
             AmfAuditLogDTO amfAuditLogDTO = new AmfAuditLogDTO(userId, userName, ipAddress, eventType, dateTime);
-            AmfAuditLogLocalServiceUtil.addAuditLogEvent(amfAuditLogDTO);
+            getAmfAuditLogService().addAuditLogEvent(amfAuditLogDTO);
 
         } catch (PortalException e) {
             e.printStackTrace();

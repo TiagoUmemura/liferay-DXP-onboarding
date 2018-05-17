@@ -8,7 +8,6 @@ public class AmfUserSearchDTO {
     String emailAddress;
     String zip;
 
-
     public long getUserId() {
         return userId;
     }

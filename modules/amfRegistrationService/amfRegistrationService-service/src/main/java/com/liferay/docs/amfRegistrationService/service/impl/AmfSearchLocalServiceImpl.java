@@ -116,4 +116,5 @@ public class AmfSearchLocalServiceImpl extends AmfSearchLocalServiceBaseImpl {
 
 	}
 
+
 }

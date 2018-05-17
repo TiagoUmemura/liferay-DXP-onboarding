@@ -1,7 +1,3 @@
-<%@ page import="com.liferay.docs.amfRegistrationService.service.AmfAuditLogLocalServiceUtil" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
-<%@ page import="com.liferay.docs.amfRegistrationService.model.AmfAuditLog" %>
 <%@ page import="com.liferay.docs.amfRegistrationService.service.AmfSearchLocalServiceUtil" %>
 <%@ page import="com.liferay.docs.amfRegistrationService.dto.AmfUserSearchDTO" %>
 <%@ include file="/init.jsp" %>
