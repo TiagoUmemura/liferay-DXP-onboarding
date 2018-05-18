@@ -19,6 +19,7 @@ import com.liferay.docs.amfRegistrationService.model.AmfAuditLog;
 import com.liferay.docs.amfRegistrationService.service.base.AmfAuditLogLocalServiceBaseImpl;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 

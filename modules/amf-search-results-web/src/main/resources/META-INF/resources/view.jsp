@@ -3,7 +3,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-	int count = AmfSearchLocalServiceUtil.countUserByZipCode("54321");
+	String zipCode = (String) request.getAttribute("zipCode");
+	int count = AmfSearchLocalServiceUtil.countUserByZipCode(zipCode);
 %>
 
 <p>
@@ -12,7 +13,7 @@
 
 <liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="<%= count %>">
 	<liferay-ui:search-container-results
-		results="<%= AmfSearchLocalServiceUtil.findUserByZipCode("54321",searchContainer.getStart(), searchContainer.getEnd())%>"
+		results="<%= AmfSearchLocalServiceUtil.findUserByZipCode(zipCode ,searchContainer.getStart(), searchContainer.getEnd())%>"
 	/>
 
 	<liferay-ui:search-container-row className="AmfUserSearchDTO" modelVar="amfUserSearch">
