@@ -1,17 +1,14 @@
-<%@ page import="com.liferay.docs.amfRegistrationService.service.AmfSearchLocalServiceUtil" %>
-<%@ page import="com.liferay.docs.amfRegistrationService.dto.AmfUserSearchDTO" %>
 <%@ include file="/init.jsp" %>
 
 <%
 	String zipCode = (String) request.getAttribute("zipCode");
-	int count = AmfSearchLocalServiceUtil.countUserByZipCode(zipCode);
 %>
 
 <p>
 	<b><liferay-ui:message key="amf-search-results-web.caption"/></b>
 </p>
 
-<liferay-ui:search-container delta="20" emptyResultsMessage="No results" total="<%= count %>">
+<liferay-ui:search-container delta="5" emptyResultsMessage="No results" total="${count}">
 	<liferay-ui:search-container-results
 		results="<%= AmfSearchLocalServiceUtil.findUserByZipCode(zipCode ,searchContainer.getStart(), searchContainer.getEnd())%>"
 	/>

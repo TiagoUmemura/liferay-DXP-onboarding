@@ -108,17 +108,9 @@ public class AmfAuditLogLocalServiceImpl extends AmfAuditLogLocalServiceBaseImpl
 		return amfAuditLogPersistence.countByEventTypeAndUserId(loginLogout, userId);
 	}
 
-	public boolean checkPermission(long groupId){
-		PermissionChecker permissionChecker = getPermissionChecker();
-		boolean viewAllEventsPermission = permissionChecker.hasPermission(groupId, PORTLET_NAME, CLASS_PK, PERMISSION_NAME);
-		return viewAllEventsPermission;
-	}
 
-	private static final long CLASS_PK = 0;
 	private static final String LOGIN = "LOGIN";
 	private static final String LOGOUT = "LOGOUT";
-	private static final String PERMISSION_NAME = "VIEW_ALL_EVENTS";
-	private static final String PORTLET_NAME = "AmfEventMonitor";
 	private static final String REGISTRATION_EVENT = "REGISTRATION";
 
 }

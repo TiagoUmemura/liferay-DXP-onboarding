@@ -58,10 +58,6 @@ public class AmfAuditLogLocalServiceUtil {
 		getService().addAuditLogEvent(amfAuditLogDTO);
 	}
 
-	public static boolean checkPermission(long groupId) {
-		return getService().checkPermission(groupId);
-	}
-
 	public static int countByLoginAndLogout() {
 		return getService().countByLoginAndLogout();
 	}

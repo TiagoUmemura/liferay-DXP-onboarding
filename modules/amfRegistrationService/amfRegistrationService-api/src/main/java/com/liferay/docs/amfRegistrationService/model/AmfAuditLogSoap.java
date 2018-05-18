@@ -23,9 +23,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.docs.amfRegistrationService.service.http.AmfAuditLogServiceSoap}.
  *
  * @author Brian Wing Shun Chan
+ * @see com.liferay.docs.amfRegistrationService.service.http.AmfAuditLogServiceSoap
  * @generated
  */
 @ProviderType

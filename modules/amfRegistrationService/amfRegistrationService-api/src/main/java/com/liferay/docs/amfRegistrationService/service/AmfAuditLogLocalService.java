@@ -73,8 +73,6 @@ public interface AmfAuditLogLocalService extends BaseLocalService,
 
 	public void addAuditLogEvent(AmfAuditLogDTO amfAuditLogDTO);
 
-	public boolean checkPermission(long groupId);
-
 	public int countByLoginAndLogout();
 
 	public int countByLoginAndLogout(long userId);

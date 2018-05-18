@@ -18,12 +18,14 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.docs.amfRegistrationService.model.AmfAuditLog;
 import com.liferay.docs.amfRegistrationService.model.AmfAuditLogModel;
+import com.liferay.docs.amfRegistrationService.model.AmfAuditLogSoap;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
@@ -39,8 +41,10 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,6 +60,7 @@ import java.util.Map;
  * @see AmfAuditLogModel
  * @generated
  */
+@JSON(strict = true)
 @ProviderType
 public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 	implements AmfAuditLogModel {
@@ -104,6 +109,50 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 	public static final long USERID_COLUMN_BITMASK = 2L;
 	public static final long USERNAME_COLUMN_BITMASK = 4L;
 	public static final long DATETIME_COLUMN_BITMASK = 8L;
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static AmfAuditLog toModel(AmfAuditLogSoap soapModel) {
+		if (soapModel == null) {
+			return null;
+		}
+
+		AmfAuditLog model = new AmfAuditLogImpl();
+
+		model.setAmfAuditLogId(soapModel.getAmfAuditLogId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setDateTime(soapModel.getDateTime());
+		model.setEventType(soapModel.getEventType());
+		model.setIpAddress(soapModel.getIpAddress());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<AmfAuditLog> toModels(AmfAuditLogSoap[] soapModels) {
+		if (soapModels == null) {
+			return null;
+		}
+
+		List<AmfAuditLog> models = new ArrayList<AmfAuditLog>(soapModels.length);
+
+		for (AmfAuditLogSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.docs.amfRegistrationService.service.util.ServiceProps.get(
 				"lock.expiration.time.com.liferay.docs.amfRegistrationService.model.AmfAuditLog"));
 
@@ -196,6 +245,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		}
 	}
 
+	@JSON
 	@Override
 	public long getAmfAuditLogId() {
 		return _amfAuditLogId;
@@ -206,6 +256,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		_amfAuditLogId = amfAuditLogId;
 	}
 
+	@JSON
 	@Override
 	public long getUserId() {
 		return _userId;
@@ -244,6 +295,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		return _originalUserId;
 	}
 
+	@JSON
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
@@ -269,6 +321,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		return GetterUtil.getString(_originalUserName);
 	}
 
+	@JSON
 	@Override
 	public Date getDateTime() {
 		return _dateTime;
@@ -281,6 +334,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		_dateTime = dateTime;
 	}
 
+	@JSON
 	@Override
 	public String getEventType() {
 		if (_eventType == null) {
@@ -306,6 +360,7 @@ public class AmfAuditLogModelImpl extends BaseModelImpl<AmfAuditLog>
 		return GetterUtil.getString(_originalEventType);
 	}
 
+	@JSON
 	@Override
 	public String getIpAddress() {
 		if (_ipAddress == null) {

@@ -10,7 +10,7 @@
 		<reference entity="Phone" package-path="com.liferay.portal" />
 	</entity>
 
-	<entity name="AmfAuditLog" table="AmfAuditLog" local-service="true" remote-service="false" uuid="false">
+	<entity name="AmfAuditLog" table="AmfAuditLog" local-service="true" remote-service="true" uuid="false">
 		<column db-name="amfAuditLogId" name="amfAuditLogId" primary="true" type="long" id-type="increment"/>
 		<column db-name="userId" name="userId" type="long" />
 		<column db-name="userName" name="userName" type="String" />

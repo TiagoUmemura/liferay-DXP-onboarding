@@ -52,11 +52,6 @@ public class AmfAuditLogLocalServiceWrapper implements AmfAuditLogLocalService,
 	}
 
 	@Override
-	public boolean checkPermission(long groupId) {
-		return _amfAuditLogLocalService.checkPermission(groupId);
-	}
-
-	@Override
 	public int countByLoginAndLogout() {
 		return _amfAuditLogLocalService.countByLoginAndLogout();
 	}
