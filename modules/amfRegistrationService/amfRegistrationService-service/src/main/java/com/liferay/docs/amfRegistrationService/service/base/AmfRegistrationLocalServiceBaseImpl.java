@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.docs.amfRegistrationService.service.AmfRegistrationLocalService;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfAuditLogPersistence;
+import com.liferay.docs.amfRegistrationService.service.persistence.AmfSearchFinder;
 import com.liferay.docs.amfRegistrationService.service.persistence.AmfSearchPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -153,6 +154,24 @@ public abstract class AmfRegistrationLocalServiceBaseImpl
 	public void setAmfSearchPersistence(
 		AmfSearchPersistence amfSearchPersistence) {
 		this.amfSearchPersistence = amfSearchPersistence;
+	}
+
+	/**
+	 * Returns the amf search finder.
+	 *
+	 * @return the amf search finder
+	 */
+	public AmfSearchFinder getAmfSearchFinder() {
+		return amfSearchFinder;
+	}
+
+	/**
+	 * Sets the amf search finder.
+	 *
+	 * @param amfSearchFinder the amf search finder
+	 */
+	public void setAmfSearchFinder(AmfSearchFinder amfSearchFinder) {
+		this.amfSearchFinder = amfSearchFinder;
 	}
 
 	/**
@@ -392,6 +411,8 @@ public abstract class AmfRegistrationLocalServiceBaseImpl
 	protected com.liferay.docs.amfRegistrationService.service.AmfSearchLocalService amfSearchLocalService;
 	@BeanReference(type = AmfSearchPersistence.class)
 	protected AmfSearchPersistence amfSearchPersistence;
+	@BeanReference(type = AmfSearchFinder.class)
+	protected AmfSearchFinder amfSearchFinder;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.AddressLocalService.class)
