@@ -1,4 +1,4 @@
-##Setup
+# Setup
 blade gw initBundle </br >
 Copy and paste on portal-ext.properties: </br >
 jdbc.default.driverClassName=org.mariadb.jdbc.Driver</br >
