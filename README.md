@@ -8,3 +8,8 @@ jdbc.default.username=root</br >
 </br >
 Mysql or MariaDB </br >
 
+## Commands used on project
+blade create -t service-builder -p com.liferay.docs.guestbook guestbook </br >
+blade gw buildService </br>
+blade create -t mvc-portlet -p guestbook.web.portlet -c GuestBookWebPortlet guestbook-web </br >
+
